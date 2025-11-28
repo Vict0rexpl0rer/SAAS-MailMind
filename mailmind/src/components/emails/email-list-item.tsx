@@ -66,11 +66,11 @@ export function EmailListItem({ email, onClick, isSelected = false }: EmailListI
     <article
       onClick={onClick}
       className={`
-        p-4 border-b border-slate-100
+        p-4 border-b border-blue-100
         cursor-pointer
         transition-colors duration-200
-        ${isSelected ? 'bg-slate-100' : 'hover:bg-slate-50'}
-        ${isUnread ? 'bg-blue-50/50' : ''}
+        ${isSelected ? 'bg-blue-100' : 'hover:bg-blue-50'}
+        ${isUnread ? 'bg-blue-50/70' : ''}
       `}
     >
       <div className="flex items-start gap-4">

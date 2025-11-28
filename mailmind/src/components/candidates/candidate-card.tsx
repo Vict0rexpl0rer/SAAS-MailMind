@@ -83,13 +83,13 @@ export function CandidateCard({ candidate, onClick }: CandidateCardProps) {
           {displayedSkills.map((skill) => (
             <span
               key={skill}
-              className="px-2 py-0.5 bg-slate-100 text-slate-600 text-xs rounded-md"
+              className="px-2 py-0.5 bg-blue-100 text-slate-700 text-xs rounded-md"
             >
               {skill}
             </span>
           ))}
           {remainingSkills > 0 && (
-            <span className="px-2 py-0.5 bg-slate-50 text-slate-400 text-xs rounded-md">
+            <span className="px-2 py-0.5 bg-blue-50 text-slate-500 text-xs rounded-md">
               +{remainingSkills}
             </span>
           )}
@@ -113,14 +113,14 @@ export function CandidateCard({ candidate, onClick }: CandidateCardProps) {
         </div>
 
         {/* Footer : Statut + Score */}
-        <div className="flex items-center justify-between pt-3 border-t border-slate-100">
+        <div className="flex items-center justify-between pt-3 border-t border-blue-100">
           <Badge variant={candidateStatusBadge[candidate.status]}>
             {statusLabels[candidate.status]}
           </Badge>
 
           {candidate.matchScore !== undefined && (
             <div className="flex items-center gap-1.5">
-              <div className="w-16 h-1.5 bg-slate-100 rounded-full overflow-hidden">
+              <div className="w-16 h-1.5 bg-blue-100 rounded-full overflow-hidden">
                 <div
                   className={`h-full rounded-full ${
                     candidate.matchScore >= 80
@@ -141,7 +141,7 @@ export function CandidateCard({ candidate, onClick }: CandidateCardProps) {
 
         {/* Résumé IA (si disponible) */}
         {candidate.aiSummary && (
-          <p className="mt-3 pt-3 border-t border-slate-100 text-xs text-slate-500 line-clamp-2">
+          <p className="mt-3 pt-3 border-t border-blue-100 text-xs text-slate-500 line-clamp-2">
             {candidate.aiSummary}
           </p>
         )}

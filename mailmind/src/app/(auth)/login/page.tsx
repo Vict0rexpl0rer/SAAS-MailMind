@@ -20,13 +20,13 @@ import { LoginForm } from './login-form'
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 flex flex-col items-center justify-center p-4">
       {/* Container principal */}
       <div className="w-full max-w-md">
         {/* Logo et titre */}
         <div className="text-center mb-8">
           {/* Logo MailMind */}
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-black rounded-2xl mb-6 shadow-lg">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-600 rounded-2xl mb-6 shadow-lg shadow-blue-300/50">
             <svg
               className="w-8 h-8 text-white"
               fill="none"
@@ -51,7 +51,7 @@ export default function LoginPage() {
         </div>
 
         {/* Card de connexion */}
-        <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 p-8">
+        <div className="bg-white rounded-2xl shadow-xl shadow-blue-200/50 p-8">
           <h2 className="text-xl font-medium text-slate-900 text-center mb-6">
             Connexion
           </h2>
@@ -62,7 +62,7 @@ export default function LoginPage() {
           {/* Séparateur */}
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-200"></div>
+              <div className="w-full border-t border-blue-200"></div>
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-4 bg-white text-slate-500">
@@ -80,11 +80,11 @@ export default function LoginPage() {
         {/* Footer */}
         <p className="text-center text-xs text-slate-500 mt-8">
           En vous connectant, vous acceptez nos{' '}
-          <a href="#" className="text-slate-700 hover:underline">
+          <a href="#" className="text-blue-600 hover:underline">
             conditions d&apos;utilisation
           </a>{' '}
           et notre{' '}
-          <a href="#" className="text-slate-700 hover:underline">
+          <a href="#" className="text-blue-600 hover:underline">
             politique de confidentialité
           </a>
           .

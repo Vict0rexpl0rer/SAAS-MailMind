@@ -40,7 +40,7 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
  */
 const variantClasses: Record<BadgeVariant, string> = {
   default: 'bg-slate-100 text-slate-700',
-  primary: 'bg-slate-900 text-white',
+  primary: 'bg-blue-600 text-white',
   success: 'bg-green-100 text-green-800',
   warning: 'bg-yellow-100 text-yellow-800',
   danger: 'bg-red-100 text-red-800',

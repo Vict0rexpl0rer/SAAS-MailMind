@@ -58,11 +58,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             text-slate-900 text-sm
             placeholder:text-slate-400
             transition-colors duration-200
-            focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent
+            focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent
             disabled:bg-slate-50 disabled:text-slate-500 disabled:cursor-not-allowed
             ${error
               ? 'border-red-300 focus:ring-red-400'
-              : 'border-slate-200 hover:border-slate-300'
+              : 'border-blue-200 hover:border-blue-300'
             }
             ${className}
           `}
@@ -123,12 +123,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             text-slate-900 text-sm
             placeholder:text-slate-400
             transition-colors duration-200
-            focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent
+            focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent
             disabled:bg-slate-50 disabled:text-slate-500 disabled:cursor-not-allowed
             resize-none
             ${error
               ? 'border-red-300 focus:ring-red-400'
-              : 'border-slate-200 hover:border-slate-300'
+              : 'border-blue-200 hover:border-blue-300'
             }
             ${className}
           `}

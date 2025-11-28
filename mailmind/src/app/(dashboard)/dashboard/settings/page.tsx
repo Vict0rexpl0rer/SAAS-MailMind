@@ -103,7 +103,7 @@ export default function SettingsPage() {
       />
 
       {/* Contenu principal */}
-      <div className="flex-1 overflow-auto p-6 bg-slate-50">
+      <div className="flex-1 overflow-auto p-6 bg-blue-50">
         <div className="max-w-3xl mx-auto space-y-6">
           {/* Section : Intégration Gmail */}
           <Card>
@@ -136,9 +136,9 @@ export default function SettingsPage() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="bg-slate-50 rounded-lg p-4 text-sm text-slate-600">
+              <div className="bg-blue-50 rounded-lg p-4 text-sm text-slate-600">
                 <p className="flex items-start gap-2">
-                  <AlertCircle className="w-4 h-4 text-slate-400 mt-0.5 flex-shrink-0" />
+                  <AlertCircle className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
                   <span>
                     La connexion Gmail vous permettra d&apos;importer automatiquement vos emails
                     et de les classer grâce à l&apos;IA. Vos données restent privées et sécurisées.
@@ -198,7 +198,7 @@ export default function SettingsPage() {
                   href="https://platform.openai.com/api-keys"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-slate-700 hover:underline"
+                  className="text-blue-600 hover:text-blue-700 hover:underline"
                 >
                   Obtenir une clé API OpenAI
                 </a>
@@ -241,9 +241,9 @@ export default function SettingsPage() {
                 onChange={(e) => setN8nUrl(e.target.value)}
                 helperText="L'URL sera appelée lors de la réception de nouveaux CVs"
               />
-              <div className="bg-slate-50 rounded-lg p-4 text-sm text-slate-600">
-                <p className="font-medium mb-2">Données envoyées au webhook :</p>
-                <pre className="bg-slate-800 text-slate-100 p-3 rounded-md text-xs overflow-x-auto">
+              <div className="bg-blue-50 rounded-lg p-4 text-sm text-slate-600">
+                <p className="font-medium mb-2 text-slate-700">Données envoyées au webhook :</p>
+                <pre className="bg-blue-900 text-blue-100 p-3 rounded-md text-xs overflow-x-auto">
 {`{
   "type": "new_cv",
   "candidate": {
@@ -274,7 +274,7 @@ export default function SettingsPage() {
           </Card>
 
           {/* Note d'information */}
-          <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-sm text-blue-700">
+          <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-sm text-slate-700">
             <p className="flex items-start gap-2">
               <AlertCircle className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
               <span>

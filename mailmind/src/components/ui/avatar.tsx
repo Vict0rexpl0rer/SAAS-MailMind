@@ -53,7 +53,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
         className={`
           relative inline-flex items-center justify-center
           rounded-full overflow-hidden
-          bg-slate-200 text-slate-600 font-medium
+          bg-blue-200 text-blue-600 font-medium
           ${sizeClasses[size]}
           ${className}
         `}

@@ -72,9 +72,9 @@ export function EmailList() {
   return (
     <div className="h-full flex flex-col">
       {/* Barre d'actions */}
-      <div className="flex items-center justify-between p-4 bg-white border-b border-slate-200">
+      <div className="flex items-center justify-between p-4 bg-white border-b border-blue-100 shadow-lg shadow-blue-200/30 rounded-t-2xl">
         <div className="flex items-center gap-2">
-          <Mail className="w-5 h-5 text-slate-400" />
+          <Mail className="w-5 h-5 text-blue-500" />
           <span className="text-sm text-slate-600">
             {emailStats.unread} non lu{emailStats.unread > 1 ? 's' : ''}
           </span>
@@ -121,7 +121,7 @@ export function EmailList() {
       </div>
 
       {/* Footer avec informations */}
-      <div className="p-3 bg-slate-50 border-t border-slate-200 text-center">
+      <div className="p-3 bg-blue-50 border-t border-blue-100 text-center rounded-b-2xl">
         <p className="text-xs text-slate-400">
           {sortedEmails.length} email{sortedEmails.length > 1 ? 's' : ''} affiché{sortedEmails.length > 1 ? 's' : ''}
           {' • '}

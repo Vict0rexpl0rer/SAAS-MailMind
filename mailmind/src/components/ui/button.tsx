@@ -42,10 +42,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
  * Classes Tailwind pour chaque variante
  */
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: 'bg-slate-900 text-white hover:bg-slate-800 shadow-sm',
-  secondary: 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:border-slate-300 shadow-sm',
-  ghost: 'bg-transparent text-slate-600 hover:bg-slate-100 hover:text-slate-900',
-  danger: 'bg-red-600 text-white hover:bg-red-700 shadow-sm',
+  primary: 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-300/50',
+  secondary: 'bg-white text-slate-700 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 shadow-lg shadow-blue-200/50',
+  ghost: 'bg-transparent text-slate-600 hover:bg-blue-100 hover:text-slate-900',
+  danger: 'bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-300/50',
 }
 
 /**
@@ -71,7 +71,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           inline-flex items-center justify-center gap-2
           font-medium rounded-lg
           transition-all duration-200
-          focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2
+          focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2
           disabled:opacity-50 disabled:cursor-not-allowed
           ${variantClasses[variant]}
           ${sizeClasses[size]}

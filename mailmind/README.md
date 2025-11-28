@@ -8,7 +8,56 @@ MailMind est un SaaS qui permet aux recruteurs et entrepreneurs de lire, organis
 - **Dashboard Emails** : Liste des emails avec filtres par catégorie (CV, Messages, Spam, Urgent)
 - **Dashboard Candidats** : Grille de cartes candidats avec statuts et compétences
 - **Page Paramètres** : Configuration des intégrations (placeholders)
-- **Design minimaliste** style Apple avec Tailwind CSS
+- **Design Widget** avec palette bleue et box-shadows prononcées
+
+## Design System
+
+### Principes de Design
+
+- **Style Widget** : Chaque conteneur est un widget distinct avec des bordures arrondies (`rounded-2xl`) et des ombres portées
+- **Box Shadows** : Ombres prononcées pour créer un effet de profondeur et de séparation entre les éléments
+- **Palette Bleue** : Toutes les couleurs primaires utilisent une palette de bleus cohérente
+
+### Palette de Couleurs
+
+| Usage | Couleur | Tailwind Class |
+|-------|---------|----------------|
+| Primary | #3b82f6 | `blue-500` |
+| Primary Dark | #1d4ed8 | `blue-700` |
+| Primary Light | #93c5fd | `blue-300` |
+| Background | #eff6ff | `blue-50` |
+| Surface | #dbeafe | `blue-100` |
+| Text Primary | #1e3a8a | `blue-900` |
+| Text Secondary | #3b82f6 | `blue-500` |
+
+### Couleurs Sémantiques (conservées)
+
+| Usage | Couleur | Tailwind Class |
+|-------|---------|----------------|
+| Succès | Vert | `green-*` |
+| Erreur | Rouge | `red-*` |
+| Warning | Jaune | `yellow-*` |
+
+### Règles de Box Shadow
+
+```css
+/* Widget standard */
+shadow-lg shadow-blue-200/50
+
+/* Widget hover */
+hover:shadow-xl hover:shadow-blue-300/50
+
+/* Widget actif/focus */
+shadow-xl shadow-blue-400/30
+```
+
+### Exemple de Card Widget
+
+```tsx
+<div className="bg-white rounded-2xl border border-blue-100 shadow-lg shadow-blue-200/50 hover:shadow-xl hover:shadow-blue-300/50 transition-shadow">
+  {/* Contenu */}
+</div>
+```
 
 ## Stack Technique
 

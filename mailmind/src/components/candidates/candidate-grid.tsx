@@ -68,16 +68,16 @@ export function CandidateGrid() {
   return (
     <div className="h-full flex flex-col">
       {/* Barre d'actions */}
-      <div className="flex items-center justify-between p-4 bg-white border-b border-slate-200">
+      <div className="flex items-center justify-between p-4 bg-white border-b border-blue-100 shadow-lg shadow-blue-200/30 rounded-t-2xl">
         <div className="flex items-center gap-2">
-          <Users className="w-5 h-5 text-slate-400" />
+          <Users className="w-5 h-5 text-blue-500" />
           <span className="text-sm text-slate-600">
             {filteredCandidates.length} candidat{filteredCandidates.length > 1 ? 's' : ''}
           </span>
         </div>
 
         {/* Toggle vue grille/liste */}
-        <div className="flex items-center gap-1 bg-slate-100 rounded-lg p-1">
+        <div className="flex items-center gap-1 bg-blue-100 rounded-lg p-1">
           <button
             onClick={() => setViewMode('grid')}
             className={`
@@ -108,7 +108,7 @@ export function CandidateGrid() {
       </div>
 
       {/* Filtres */}
-      <div className="border-b border-slate-200">
+      <div className="border-b border-blue-100">
         <CandidateFilters
           activeFilter={activeFilter}
           onFilterChange={setActiveFilter}
@@ -117,7 +117,7 @@ export function CandidateGrid() {
       </div>
 
       {/* Grille/Liste des candidats */}
-      <div className="flex-1 overflow-auto p-6 bg-slate-50">
+      <div className="flex-1 overflow-auto p-6 bg-blue-50">
         {sortedCandidates.length === 0 ? (
           // État vide
           <div className="flex flex-col items-center justify-center h-64 text-center">
@@ -150,7 +150,7 @@ export function CandidateGrid() {
       </div>
 
       {/* Footer avec informations */}
-      <div className="p-3 bg-white border-t border-slate-200 text-center">
+      <div className="p-3 bg-white border-t border-blue-100 text-center rounded-b-2xl">
         <p className="text-xs text-slate-400">
           {sortedCandidates.length} candidat{sortedCandidates.length > 1 ? 's' : ''} affiché{sortedCandidates.length > 1 ? 's' : ''}
           {' • '}

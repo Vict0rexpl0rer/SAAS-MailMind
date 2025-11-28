@@ -68,8 +68,8 @@ export function CandidateFilters({ activeFilter, onFilterChange, counts }: Candi
               whitespace-nowrap
               transition-all duration-200
               ${isActive
-                ? 'bg-slate-900 text-white shadow-sm'
-                : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                ? 'bg-blue-600 text-white shadow-lg shadow-blue-300/50'
+                : 'bg-blue-100 text-blue-600 hover:bg-blue-200'
               }
             `}
           >
@@ -81,7 +81,7 @@ export function CandidateFilters({ activeFilter, onFilterChange, counts }: Candi
                   px-1.5 py-0.5 text-xs rounded-full
                   ${isActive
                     ? 'bg-white/20 text-white'
-                    : 'bg-slate-200 text-slate-500'
+                    : 'bg-blue-200 text-blue-500'
                   }
                 `}
               >

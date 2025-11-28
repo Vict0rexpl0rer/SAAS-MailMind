@@ -15,9 +15,15 @@
  * Variables CSS personnalisées
  */
 :root {
-  /* Couleurs de base */
-  --background: #ffffff;
-  --foreground: #0f172a;
+  /* Couleurs de base - Palette Bleue */
+  --background: #eff6ff; /* blue-50 */
+  --foreground: #0f172a; /* slate-900 - texte noir */
+
+  /* Couleurs primaires */
+  --primary: #3b82f6; /* blue-500 */
+  --primary-dark: #1d4ed8; /* blue-700 */
+  --primary-light: #93c5fd; /* blue-300 */
+  --surface: #dbeafe; /* blue-100 */
 
   /* Police Open Sans */
   --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
@@ -50,16 +56,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #dbeafe; /* blue-100 */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #93c5fd; /* blue-300 */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #60a5fa; /* blue-400 */
 }
 
 /**
@@ -85,7 +91,7 @@ body {
  * Focus visible pour l'accessibilité
  */
 :focus-visible {
-  outline: 2px solid #64748b;
+  outline: 2px solid #3b82f6; /* blue-500 */
   outline-offset: 2px;
 }
 

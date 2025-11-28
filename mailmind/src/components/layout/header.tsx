@@ -69,7 +69,7 @@ export function Header({ title, subtitle, user }: HeaderProps) {
   }
 
   return (
-    <header className="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-6">
+    <header className="h-16 bg-white border-b border-blue-100 flex items-center justify-between px-6 shadow-lg shadow-blue-200/30">
       {/* Titre de la page */}
       <div>
         <h1 className="text-xl font-semibold text-slate-900">{title}</h1>
@@ -86,7 +86,7 @@ export function Header({ title, subtitle, user }: HeaderProps) {
           <input
             type="text"
             placeholder="Rechercher..."
-            className="w-64 pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-300 focus:border-transparent transition-colors"
+            className="w-64 pl-10 pr-4 py-2 bg-blue-50 border border-blue-200 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition-colors"
           />
         </div>
 
@@ -94,7 +94,7 @@ export function Header({ title, subtitle, user }: HeaderProps) {
         <div className="relative">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="flex items-center gap-2 p-2 rounded-lg hover:bg-slate-100 transition-colors"
+            className="flex items-center gap-2 p-2 rounded-lg hover:bg-blue-100 transition-colors"
           >
             <Avatar
               src={displayUser.avatarUrl}
@@ -117,9 +117,9 @@ export function Header({ title, subtitle, user }: HeaderProps) {
               />
 
               {/* Menu */}
-              <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg shadow-slate-200 border border-slate-200 py-2 z-20">
+              <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg shadow-blue-200/50 border border-blue-100 py-2 z-20">
                 {/* Infos utilisateur */}
-                <div className="px-4 py-3 border-b border-slate-100">
+                <div className="px-4 py-3 border-b border-blue-100">
                   <p className="text-sm font-medium text-slate-900">
                     {displayUser.name}
                   </p>

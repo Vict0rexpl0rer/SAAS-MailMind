@@ -87,27 +87,27 @@ export function Sidebar() {
         className="
           w-[72px] group-hover:w-64
           h-full
-          bg-white rounded-2xl shadow-lg border border-gray-200
+          bg-white rounded-2xl shadow-lg shadow-blue-200/50 border border-blue-100
           flex flex-col
           overflow-hidden
-          group-hover:shadow-xl
+          group-hover:shadow-xl group-hover:shadow-blue-300/50
         "
         style={{
           transition: 'width 500ms cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 300ms ease'
         }}
       >
         {/* Header - Logo et nom */}
-        <div className="p-4 border-b border-gray-100">
+        <div className="p-4 border-b border-blue-100">
           <Link href="/dashboard/emails" className="flex items-center gap-3">
             <div className="
-              w-10 h-10 bg-black rounded-xl flex items-center justify-center flex-shrink-0
+              w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0
               transition-transform duration-300 ease-out
               group-hover:scale-105
             ">
               <Mail className="w-5 h-5 text-white" />
             </div>
             <span
-              className={`${textTransitionClasses} text-xl font-semibold text-gray-900`}
+              className={`${textTransitionClasses} text-xl font-semibold text-slate-900`}
               style={{ transitionDelay: '0ms' }}
             >
               MailMind
@@ -120,7 +120,7 @@ export function Sidebar() {
           {/* Section Navigation */}
           <div className="mb-4">
             <p
-              className={`${textTransitionClasses} px-3 mb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider`}
+              className={`${textTransitionClasses} px-3 mb-2 text-xs font-semibold text-slate-400 uppercase tracking-wider`}
               style={{ transitionDelay: '0ms' }}
             >
               Navigation
@@ -141,8 +141,8 @@ export function Sidebar() {
                         text-sm font-medium
                         transition-colors duration-200
                         ${isActive
-                          ? 'bg-gray-900 text-white'
-                          : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                          ? 'bg-blue-600 text-white'
+                          : 'text-slate-600 hover:bg-blue-100 hover:text-slate-900'
                         }
                       `}
                     >
@@ -169,8 +169,8 @@ export function Sidebar() {
                             transition-[opacity,transform]
                             duration-75 group-hover:duration-300
                             ${isActive
-                              ? 'bg-white text-gray-900'
-                              : 'bg-gray-200 text-gray-700'
+                              ? 'bg-white text-slate-900'
+                              : 'bg-blue-200 text-slate-700'
                             }
                           `}
                           style={{ transitionDelay: `${delayIn + 20}ms` }}
@@ -188,7 +188,7 @@ export function Sidebar() {
           {/* Section Catégories */}
           <div>
             <p
-              className={`${textTransitionClasses} px-3 mb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider`}
+              className={`${textTransitionClasses} px-3 mb-2 text-xs font-semibold text-slate-400 uppercase tracking-wider`}
               style={{ transitionDelay: '0ms' }}
             >
               Catégories
@@ -205,8 +205,8 @@ export function Sidebar() {
                       className="
                         flex items-center gap-3
                         px-3 py-2 rounded-lg
-                        text-sm text-gray-600
-                        hover:bg-gray-100 hover:text-gray-900
+                        text-sm text-slate-600
+                        hover:bg-blue-100 hover:text-slate-900
                         transition-colors duration-200
                       "
                     >
@@ -226,7 +226,7 @@ export function Sidebar() {
         </nav>
 
         {/* Section utilisateur en bas */}
-        <div className="mt-auto p-4 border-t border-gray-100">
+        <div className="mt-auto p-4 border-t border-blue-100">
           <div className="flex items-center gap-3">
             <div className="
               w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0
@@ -236,7 +236,7 @@ export function Sidebar() {
               <span className="text-white font-medium text-sm">VI</span>
             </div>
             <span
-              className="opacity-0 group-hover:opacity-100 translate-x-[-8px] group-hover:translate-x-0 transition-[opacity,transform] duration-75 group-hover:duration-300 ease-out whitespace-nowrap text-sm font-medium text-gray-900"
+              className="opacity-0 group-hover:opacity-100 translate-x-[-8px] group-hover:translate-x-0 transition-[opacity,transform] duration-75 group-hover:duration-300 ease-out whitespace-nowrap text-sm font-medium text-slate-900"
               style={{ transitionDelay: '150ms' }}
             >
               Victor
