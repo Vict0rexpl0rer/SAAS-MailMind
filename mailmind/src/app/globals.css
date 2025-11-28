@@ -1,0 +1,110 @@
+/**
+ * =============================================================================
+ * STYLES GLOBAUX - MAILMIND
+ * =============================================================================
+ *
+ * Ce fichier contient les styles globaux de l'application.
+ * Utilise Tailwind CSS v4 avec la directive @import.
+ *
+ * =============================================================================
+ */
+
+@import "tailwindcss";
+
+/**
+ * Variables CSS personnalisées
+ */
+:root {
+  /* Couleurs de base */
+  --background: #ffffff;
+  --foreground: #0f172a;
+
+  /* Police Inter */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+/**
+ * Configuration du thème Tailwind
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+}
+
+/**
+ * Styles de base
+ */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/**
+ * Scrollbar personnalisée (style minimaliste)
+ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/**
+ * Utilitaires personnalisés
+ */
+
+/* Ligne de texte tronquée avec ellipse */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/**
+ * Focus visible pour l'accessibilité
+ */
+:focus-visible {
+  outline: 2px solid #64748b;
+  outline-offset: 2px;
+}
+
+/**
+ * Transitions douces par défaut
+ */
+* {
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/**
+ * Désactive les transitions pour les utilisateurs qui préfèrent
+ * réduire les animations
+ */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
