@@ -10,16 +10,18 @@
  */
 
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Open_Sans } from 'next/font/google'
 import './globals.css'
 
 /**
- * Police Inter - Police moderne et lisible
- * Utilisée par Apple, Figma, et de nombreuses apps modernes
+ * Police Open Sans - Police moderne et très lisible
+ * Variable font avec weights de 300 à 800
  */
-const inter = Inter({
+const openSans = Open_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-open-sans',
+  weight: ['300', '400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
 })
 
 /**
@@ -56,7 +58,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr" className={inter.variable}>
+    <html lang="fr" className={openSans.variable}>
       <body className="font-sans antialiased bg-white text-slate-900">
         {children}
       </body>

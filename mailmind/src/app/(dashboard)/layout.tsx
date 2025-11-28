@@ -4,21 +4,19 @@
  * =============================================================================
  *
  * Layout partagé par toutes les pages du dashboard.
- * Inclut la sidebar et structure la mise en page principale.
+ * Inclut la sidebar flottante et structure la mise en page principale.
  *
- * Ce layout est protégé par le middleware - seuls les utilisateurs
- * authentifiés peuvent y accéder.
+ * La sidebar est en position fixed avec effet hover expand.
+ * Le contenu principal a un margin-left pour compenser la sidebar collapsed.
  *
  * STRUCTURE :
  * ┌──────────────────────────────────────────┐
- * │ Sidebar │           Main Content         │
- * │         │  ┌──────────────────────────┐  │
- * │         │  │        Header            │  │
- * │         │  ├──────────────────────────┤  │
- * │         │  │                          │  │
- * │         │  │     Page Content         │  │
- * │         │  │                          │  │
- * │         │  └──────────────────────────┘  │
+ * │ [Sidebar]│        Main Content           │
+ * │ (fixed)  │  ┌──────────────────────────┐ │
+ * │          │  │                          │ │
+ * │          │  │     Page Content         │ │
+ * │          │  │                          │ │
+ * │          │  └──────────────────────────┘ │
  * └──────────────────────────────────────────┘
  *
  * =============================================================================
@@ -32,12 +30,12 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex h-screen bg-slate-100">
-      {/* Sidebar - fixe sur la gauche */}
+    <div className="min-h-screen bg-slate-100">
+      {/* Sidebar - fixed position avec hover expand */}
       <Sidebar />
 
-      {/* Contenu principal - scrollable */}
-      <main className="flex-1 overflow-auto">
+      {/* Contenu principal - avec margin pour la sidebar collapsed (72px + 24px padding) */}
+      <main className="ml-[96px] min-h-screen overflow-auto p-6">
         {children}
       </main>
     </div>

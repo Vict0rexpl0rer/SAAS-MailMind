@@ -19,8 +19,8 @@
   --background: #ffffff;
   --foreground: #0f172a;
 
-  /* Police Inter */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Police Open Sans */
+  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
 /**
@@ -29,7 +29,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-open-sans);
 }
 
 /**

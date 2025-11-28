@@ -3,13 +3,13 @@
  * COMPOSANT LAYOUT - SIDEBAR
  * =============================================================================
  *
- * Barre de navigation latérale du dashboard.
- * Affiche le logo, les liens de navigation et les statistiques.
+ * Barre de navigation latérale du dashboard avec effet hover expand.
+ * Style "carte flottante" inspiré du design Acet Labs.
  *
- * Design minimaliste style Apple avec :
- * - Logo en haut
- * - Navigation principale
- * - Statistiques (nombre d'emails, candidats)
+ * Comportement :
+ * - Par défaut (collapsed) : ~72px, icônes seulement
+ * - Au hover (expanded) : ~256px, icônes + labels avec animation fluide
+ * - À la fermeture : textes disparaissent instantanément
  *
  * =============================================================================
  */
@@ -63,117 +63,184 @@ const emailCategories = [
   { label: 'Spam', href: '/dashboard/emails?filter=spam', icon: Trash2 },
 ]
 
+/**
+ * Classes pour les textes avec transition asymétrique :
+ * - Hover IN : apparition avec délai et slide
+ * - Hover OUT : disparition ultra rapide (75ms) sans délai
+ */
+const textTransitionClasses = `
+  opacity-0 group-hover:opacity-100
+  translate-x-[-8px] group-hover:translate-x-0
+  transition-[opacity,transform]
+  duration-75 group-hover:duration-300
+  ease-out
+  whitespace-nowrap
+`
+
 export function Sidebar() {
-  // Récupère le chemin actuel pour mettre en surbrillance le lien actif
   const pathname = usePathname()
 
   return (
-    <aside className="w-64 h-screen bg-slate-50 border-r border-slate-200 flex flex-col">
-      {/* Logo et nom de l'app */}
-      <div className="p-6 border-b border-slate-200">
-        <Link href="/dashboard/emails" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center">
-            <Mail className="w-5 h-5 text-white" />
-          </div>
-          <span className="text-xl font-semibold text-slate-900">MailMind</span>
-        </Link>
-      </div>
+    <aside className="group fixed top-0 left-0 z-40 h-screen p-3">
+      {/* Conteneur carte flottante avec hover expand et animation glissante */}
+      <div
+        className="
+          w-[72px] group-hover:w-64
+          h-full
+          bg-white rounded-2xl shadow-lg border border-gray-200
+          flex flex-col
+          overflow-hidden
+          group-hover:shadow-xl
+        "
+        style={{
+          transition: 'width 500ms cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 300ms ease'
+        }}
+      >
+        {/* Header - Logo et nom */}
+        <div className="p-4 border-b border-gray-100">
+          <Link href="/dashboard/emails" className="flex items-center gap-3">
+            <div className="
+              w-10 h-10 bg-black rounded-xl flex items-center justify-center flex-shrink-0
+              transition-transform duration-300 ease-out
+              group-hover:scale-105
+            ">
+              <Mail className="w-5 h-5 text-white" />
+            </div>
+            <span
+              className={`${textTransitionClasses} text-xl font-semibold text-gray-900`}
+              style={{ transitionDelay: '0ms' }}
+            >
+              MailMind
+            </span>
+          </Link>
+        </div>
 
-      {/* Navigation principale */}
-      <nav className="flex-1 p-4">
-        {/* Section principale */}
-        <div className="mb-6">
-          <p className="px-3 mb-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            Navigation
-          </p>
-          <ul className="space-y-1">
-            {mainNavItems.map((item) => {
-              const isActive = pathname.startsWith(item.href.split('?')[0])
-              const Icon = item.icon
+        {/* Navigation principale */}
+        <nav className="flex-1 p-3 overflow-y-auto overflow-x-hidden">
+          {/* Section Navigation */}
+          <div className="mb-4">
+            <p
+              className={`${textTransitionClasses} px-3 mb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider`}
+              style={{ transitionDelay: '0ms' }}
+            >
+              Navigation
+            </p>
+            <ul className="space-y-1">
+              {mainNavItems.map((item, index) => {
+                const isActive = pathname.startsWith(item.href.split('?')[0])
+                const Icon = item.icon
+                const delayIn = 50 + index * 30
 
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className={`
-                      flex items-center justify-between
-                      px-3 py-2.5 rounded-lg
-                      text-sm font-medium
-                      transition-colors duration-200
-                      ${isActive
-                        ? 'bg-slate-900 text-white'
-                        : 'text-slate-600 hover:bg-slate-200 hover:text-slate-900'
-                      }
-                    `}
-                  >
-                    <span className="flex items-center gap-3">
-                      <Icon className="w-5 h-5" />
-                      {item.label}
-                    </span>
-                    {item.badge !== undefined && item.badge > 0 && (
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className={`
+                        flex items-center gap-3
+                        px-3 py-2.5 rounded-lg
+                        text-sm font-medium
+                        transition-colors duration-200
+                        ${isActive
+                          ? 'bg-gray-900 text-white'
+                          : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                        }
+                      `}
+                    >
+                      <Icon className="w-5 h-5 flex-shrink-0" />
                       <span
-                        className={`
-                          px-2 py-0.5 text-xs rounded-full
-                          ${isActive
-                            ? 'bg-white text-slate-900'
-                            : 'bg-slate-200 text-slate-700'
-                          }
-                        `}
+                        className={`${textTransitionClasses} flex-1`}
+                        style={{
+                          transitionDelay: '0ms',
+                        }}
                       >
-                        {item.badge}
+                        <span
+                          className="inline-block transition-[opacity,transform] duration-75 group-hover:duration-300 opacity-0 group-hover:opacity-100 translate-x-[-8px] group-hover:translate-x-0"
+                          style={{ transitionDelay: `${delayIn}ms` }}
+                        >
+                          {item.label}
+                        </span>
                       </span>
-                    )}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+                      {item.badge !== undefined && item.badge > 0 && (
+                        <span
+                          className={`
+                            px-2 py-0.5 text-xs rounded-full
+                            opacity-0 group-hover:opacity-100
+                            scale-90 group-hover:scale-100
+                            transition-[opacity,transform]
+                            duration-75 group-hover:duration-300
+                            ${isActive
+                              ? 'bg-white text-gray-900'
+                              : 'bg-gray-200 text-gray-700'
+                            }
+                          `}
+                          style={{ transitionDelay: `${delayIn + 20}ms` }}
+                        >
+                          {item.badge}
+                        </span>
+                      )}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
 
-        {/* Catégories d'emails */}
-        <div>
-          <p className="px-3 mb-2 text-xs font-semibold text-slate-400 uppercase tracking-wider">
-            Catégories
-          </p>
-          <ul className="space-y-1">
-            {emailCategories.map((item) => {
-              const Icon = item.icon
+          {/* Section Catégories */}
+          <div>
+            <p
+              className={`${textTransitionClasses} px-3 mb-2 text-xs font-semibold text-gray-400 uppercase tracking-wider`}
+              style={{ transitionDelay: '0ms' }}
+            >
+              Catégories
+            </p>
+            <ul className="space-y-1">
+              {emailCategories.map((item, index) => {
+                const Icon = item.icon
+                const delayIn = 120 + index * 30
 
-              return (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-slate-600 hover:bg-slate-200 hover:text-slate-900 transition-colors duration-200"
-                  >
-                    <Icon className="w-4 h-4" />
-                    {item.label}
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      </nav>
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="
+                        flex items-center gap-3
+                        px-3 py-2 rounded-lg
+                        text-sm text-gray-600
+                        hover:bg-gray-100 hover:text-gray-900
+                        transition-colors duration-200
+                      "
+                    >
+                      <Icon className="w-5 h-5 flex-shrink-0" />
+                      <span
+                        className="opacity-0 group-hover:opacity-100 translate-x-[-8px] group-hover:translate-x-0 transition-[opacity,transform] duration-75 group-hover:duration-300 ease-out whitespace-nowrap"
+                        style={{ transitionDelay: `${delayIn}ms` }}
+                      >
+                        {item.label}
+                      </span>
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        </nav>
 
-      {/* Section statistiques en bas */}
-      <div className="p-4 border-t border-slate-200">
-        <div className="bg-white rounded-lg p-4 shadow-sm">
-          <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">
-            Statistiques
-          </p>
-          <div className="space-y-2">
-            <div className="flex justify-between items-center text-sm">
-              <span className="text-slate-600">Emails reçus</span>
-              <span className="font-semibold text-slate-900">{emailStats.total}</span>
+        {/* Section utilisateur en bas */}
+        <div className="mt-auto p-4 border-t border-gray-100">
+          <div className="flex items-center gap-3">
+            <div className="
+              w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0
+              transition-transform duration-300 ease-out
+              group-hover:scale-105
+            ">
+              <span className="text-white font-medium text-sm">VI</span>
             </div>
-            <div className="flex justify-between items-center text-sm">
-              <span className="text-slate-600">CV détectés</span>
-              <span className="font-semibold text-slate-900">{emailStats.cv}</span>
-            </div>
-            <div className="flex justify-between items-center text-sm">
-              <span className="text-slate-600">Candidats</span>
-              <span className="font-semibold text-slate-900">{candidateStats.total}</span>
-            </div>
+            <span
+              className="opacity-0 group-hover:opacity-100 translate-x-[-8px] group-hover:translate-x-0 transition-[opacity,transform] duration-75 group-hover:duration-300 ease-out whitespace-nowrap text-sm font-medium text-gray-900"
+              style={{ transitionDelay: '150ms' }}
+            >
+              Victor
+            </span>
           </div>
         </div>
       </div>
