@@ -4,10 +4,7 @@
  * =============================================================================
  *
  * Page de configuration de l'application.
- * Permet de gérer les intégrations (Gmail, OpenAI, n8n).
- *
- * Pour le MVP, ces paramètres sont des placeholders non fonctionnels
- * mais préparés pour les futures intégrations.
+ * Permet de gérer les intégrations (Gmail, OpenAI, Mistral, n8n).
  *
  * URL : /dashboard/settings
  *
@@ -16,7 +13,7 @@
 
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Header } from '@/components/layout'
 import {
   Card,
@@ -38,19 +35,32 @@ import {
   AlertCircle,
   ExternalLink,
   Key,
-  Link as LinkIcon
+  Link as LinkIcon,
+  Sparkles
 } from 'lucide-react'
+import { getAISettings, saveAISettings, AIProvider } from '@/lib/ai'
 
 export default function SettingsPage() {
-  // États pour les différentes intégrations (simulés)
+  // États pour les différentes intégrations
   const [gmailConnected, setGmailConnected] = useState(false)
   const [openaiKey, setOpenaiKey] = useState('')
+  const [mistralKey, setMistralKey] = useState('')
+  const [preferredProvider, setPreferredProvider] = useState<AIProvider>('openai')
   const [n8nUrl, setN8nUrl] = useState('')
 
   // États de chargement
   const [isConnectingGmail, setIsConnectingGmail] = useState(false)
-  const [isSavingOpenai, setIsSavingOpenai] = useState(false)
+  const [isSavingAI, setIsSavingAI] = useState(false)
   const [isSavingN8n, setIsSavingN8n] = useState(false)
+  const [aiSaved, setAiSaved] = useState(false)
+
+  // Charger les paramètres AI au montage
+  useEffect(() => {
+    const settings = getAISettings()
+    if (settings.openaiKey) setOpenaiKey(settings.openaiKey)
+    if (settings.mistralKey) setMistralKey(settings.mistralKey)
+    if (settings.preferredProvider) setPreferredProvider(settings.preferredProvider)
+  }, [])
 
   /**
    * Simule la connexion Gmail
@@ -75,13 +85,21 @@ export default function SettingsPage() {
   }
 
   /**
-   * Simule la sauvegarde de la clé OpenAI
+   * Sauvegarde les clés API AI dans localStorage
    */
-  const handleSaveOpenaiKey = async () => {
-    setIsSavingOpenai(true)
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    setIsSavingOpenai(false)
-    alert('Clé OpenAI sauvegardée (simulation)')
+  const handleSaveAIKeys = async () => {
+    setIsSavingAI(true)
+    await new Promise(resolve => setTimeout(resolve, 500))
+
+    saveAISettings({
+      openaiKey: openaiKey || undefined,
+      mistralKey: mistralKey || undefined,
+      preferredProvider,
+    })
+
+    setIsSavingAI(false)
+    setAiSaved(true)
+    setTimeout(() => setAiSaved(false), 3000)
   }
 
   /**
@@ -168,51 +186,130 @@ export default function SettingsPage() {
             </CardFooter>
           </Card>
 
-          {/* Section : Clé API OpenAI */}
+          {/* Section : Configuration IA */}
           <Card>
             <CardHeader>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                  <Brain className="w-5 h-5 text-green-600" />
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <Sparkles className="w-5 h-5 text-purple-600" />
+                  </div>
+                  <div>
+                    <CardTitle>Configuration IA</CardTitle>
+                    <CardDescription>
+                      Configurez vos clés API pour les outils IA (ChatGPT ou Mistral)
+                    </CardDescription>
+                  </div>
                 </div>
-                <div>
-                  <CardTitle>Clé API OpenAI</CardTitle>
-                  <CardDescription>
-                    Ajoutez votre clé OpenAI pour le classement intelligent des emails
-                  </CardDescription>
-                </div>
+                {aiSaved && (
+                  <Badge variant="success">
+                    <CheckCircle className="w-3 h-3 mr-1" />
+                    Sauvegardé
+                  </Badge>
+                )}
               </div>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <Input
-                label="Clé API"
-                type="password"
-                placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxx"
-                value={openaiKey}
-                onChange={(e) => setOpenaiKey(e.target.value)}
-                helperText="Votre clé est stockée de manière sécurisée et chiffrée"
-              />
-              <div className="flex items-center gap-2 text-sm text-slate-500">
-                <ExternalLink className="w-4 h-4" />
-                <a
-                  href="https://platform.openai.com/api-keys"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-700 hover:underline"
-                >
-                  Obtenir une clé API OpenAI
-                </a>
+            <CardContent className="space-y-6">
+              {/* Sélection du provider préféré */}
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-slate-700">
+                  Provider préféré
+                </label>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setPreferredProvider('openai')}
+                    className={`
+                      flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
+                      ${preferredProvider === 'openai'
+                        ? 'bg-green-600 text-white shadow-md'
+                        : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
+                      }
+                    `}
+                  >
+                    <Brain className="w-4 h-4 inline mr-2" />
+                    OpenAI (ChatGPT)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setPreferredProvider('mistral')}
+                    className={`
+                      flex-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200
+                      ${preferredProvider === 'mistral'
+                        ? 'bg-orange-600 text-white shadow-md'
+                        : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
+                      }
+                    `}
+                  >
+                    <Sparkles className="w-4 h-4 inline mr-2" />
+                    Mistral AI
+                  </button>
+                </div>
+              </div>
+
+              {/* Clé OpenAI */}
+              <div className="space-y-2">
+                <Input
+                  label="Clé API OpenAI"
+                  type="password"
+                  placeholder="sk-xxxxxxxxxxxxxxxxxxxxxxxx"
+                  value={openaiKey}
+                  onChange={(e) => setOpenaiKey(e.target.value)}
+                />
+                <div className="flex items-center gap-2 text-sm text-slate-500">
+                  <ExternalLink className="w-4 h-4" />
+                  <a
+                    href="https://platform.openai.com/api-keys"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-700 hover:underline"
+                  >
+                    Obtenir une clé API OpenAI
+                  </a>
+                </div>
+              </div>
+
+              {/* Clé Mistral */}
+              <div className="space-y-2">
+                <Input
+                  label="Clé API Mistral"
+                  type="password"
+                  placeholder="xxxxxxxxxxxxxxxxxxxxxxxx"
+                  value={mistralKey}
+                  onChange={(e) => setMistralKey(e.target.value)}
+                />
+                <div className="flex items-center gap-2 text-sm text-slate-500">
+                  <ExternalLink className="w-4 h-4" />
+                  <a
+                    href="https://console.mistral.ai/api-keys/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-700 hover:underline"
+                  >
+                    Obtenir une clé API Mistral
+                  </a>
+                </div>
+              </div>
+
+              <div className="bg-blue-50 rounded-lg p-4 text-sm text-slate-600">
+                <p className="flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 text-blue-500 mt-0.5 flex-shrink-0" />
+                  <span>
+                    Vos clés API sont stockées localement dans votre navigateur.
+                    Vous pouvez configurer les deux providers et basculer entre eux à tout moment.
+                  </span>
+                </p>
               </div>
             </CardContent>
             <CardFooter>
               <Button
                 variant="primary"
-                onClick={handleSaveOpenaiKey}
-                isLoading={isSavingOpenai}
-                disabled={!openaiKey}
+                onClick={handleSaveAIKeys}
+                isLoading={isSavingAI}
+                disabled={!openaiKey && !mistralKey}
               >
                 <Key className="w-4 h-4" />
-                Sauvegarder la clé
+                Sauvegarder les clés API
               </Button>
             </CardFooter>
           </Card>

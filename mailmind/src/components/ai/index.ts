@@ -1,15 +1,11 @@
 /**
  * =============================================================================
- * TYPES TYPESCRIPT - INDEX
+ * COMPOSANTS AI - INDEX
  * =============================================================================
  *
- * Ce fichier centralise et exporte tous les types TypeScript du projet.
- * Cela permet d'importer facilement depuis '@/types'
+ * Export de tous les composants AI.
  *
  * =============================================================================
  */
 
-export * from './email'
-export * from './candidate'
-export * from './user'
-export * from './ai'
+export * from './ai-tool-card'

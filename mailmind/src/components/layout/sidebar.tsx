@@ -25,7 +25,8 @@ import {
   Inbox,
   FileText,
   AlertTriangle,
-  Trash2
+  Trash2,
+  Sparkles
 } from 'lucide-react'
 import { emailStats } from '@/data/mock-emails'
 import { candidateStats } from '@/data/mock-candidates'
@@ -45,6 +46,11 @@ const mainNavItems = [
     href: '/dashboard/candidates',
     icon: Users,
     badge: candidateStats.new,
+  },
+  {
+    label: 'IA',
+    href: '/dashboard/ia',
+    icon: Sparkles,
   },
   {
     label: 'Paramètres',
