@@ -79,12 +79,13 @@ export async function updateSession(request: NextRequest) {
   const isAuthRoute = request.nextUrl.pathname.startsWith('/login')
   const isDashboardRoute = request.nextUrl.pathname.startsWith('/dashboard')
 
-  // Si pas d'utilisateur et tentative d'accès au dashboard -> redirection login
-  if (!user && isDashboardRoute) {
-    const url = request.nextUrl.clone()
-    url.pathname = '/login'
-    return NextResponse.redirect(url)
-  }
+  // MODE DEV : Désactivé temporairement pour permettre l'accès sans login
+  // TODO: Réactiver cette protection avant la mise en production
+  // if (!user && isDashboardRoute) {
+  //   const url = request.nextUrl.clone()
+  //   url.pathname = '/login'
+  //   return NextResponse.redirect(url)
+  // }
 
   // Si utilisateur connecté et sur page login -> redirection dashboard
   if (user && isAuthRoute) {

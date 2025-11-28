@@ -1,7 +1,27 @@
 {
   "permissions": {
     "allow": [
-      "Bash(gh auth status:*)"
+      "Bash(gh auth status:*)",
+      "Bash(mkdir:*)",
+      "Bash(src/app/(auth)/login )",
+      "Bash(src/app/(auth)/auth/callback )",
+      "Bash(src/app/(dashboard)/dashboard/emails )",
+      "Bash(src/app/(dashboard)/dashboard/candidates )",
+      "Bash(src/app/(dashboard)/dashboard/settings )",
+      "Bash(src/app/api/gmail )",
+      "Bash(src/app/api/openai )",
+      "Bash(src/app/api/webhooks/n8n )",
+      "Bash(src/components/ui )",
+      "Bash(src/components/layout )",
+      "Bash(src/components/emails )",
+      "Bash(src/components/candidates )",
+      "Bash(src/lib/supabase )",
+      "Bash(src/lib/gmail )",
+      "Bash(src/lib/openai )",
+      "Bash(src/types )",
+      "Bash(src/data )",
+      "Bash(src/hooks )",
+      "Bash(src/utils)"
     ],
     "deny": [],
     "ask": []
