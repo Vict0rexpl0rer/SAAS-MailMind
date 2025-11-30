@@ -21,7 +21,11 @@
       "Bash(src/types )",
       "Bash(src/data )",
       "Bash(src/hooks )",
-      "Bash(src/utils)"
+      "Bash(src/utils)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

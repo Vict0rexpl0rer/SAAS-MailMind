@@ -14,3 +14,12 @@ export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 export { Badge, emailCategoryBadge, candidateStatusBadge } from './badge'
 export { Input, Textarea } from './input'
 export { Avatar, getInitials } from './avatar'
+
+// Composants Mode Test
+export {
+  TestModeBanner,
+  TestModeBadge,
+  TestModeIndicator,
+  TestModeWarning
+} from './TestModeBanner'
+export { TestModeBannerWrapper } from './TestModeBannerWrapper'

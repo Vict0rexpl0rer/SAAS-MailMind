@@ -1,46 +1,42 @@
 /**
  * =============================================================================
- * COMPOSANT - EMAIL FILTERS
+ * COMPOSANT - EMAIL FILTERS (Legacy)
  * =============================================================================
  *
- * Barre de filtres pour la liste des emails.
- * Permet de filtrer par catégorie (Tous, CV, Messages, Spam, Urgent).
+ * Barre de filtres simplifiée pour la liste des emails.
+ * Version legacy pour la rétrocompatibilité.
+ *
+ * Pour les 21 catégories, utilisez le composant CategoryFilters.
  *
  * =============================================================================
  */
 
 'use client'
 
-import { Inbox, FileText, MessageSquare, Trash2, AlertTriangle } from 'lucide-react'
-import { EmailCategory } from '@/types'
+import { Inbox, FileText, MessageSquare, Trash2, AlertTriangle, Users, Briefcase } from 'lucide-react'
+import { EmailCategory, EmailCategoryGroup } from '@/types'
 
 /**
  * Props du composant
  */
 interface EmailFiltersProps {
   /** Filtre actif */
-  activeFilter: EmailCategory | 'all'
+  activeFilter: EmailCategory | EmailCategoryGroup | 'all'
   /** Callback lors du changement de filtre */
   onFilterChange: (filter: EmailCategory | 'all') => void
   /** Compteurs par catégorie */
-  counts: {
-    all: number
-    cv: number
-    message: number
-    spam: number
-    urgent: number
-  }
+  counts: Record<string, number>
 }
 
 /**
- * Configuration des filtres
+ * Configuration des filtres simplifiés (groupes principaux)
  */
-const filters = [
-  { id: 'all' as const, label: 'Tous', icon: Inbox },
-  { id: 'cv' as const, label: 'CV', icon: FileText },
-  { id: 'message' as const, label: 'Messages', icon: MessageSquare },
-  { id: 'urgent' as const, label: 'Urgents', icon: AlertTriangle },
-  { id: 'spam' as const, label: 'Spam', icon: Trash2 },
+const filters: { id: EmailCategoryGroup | 'all'; label: string; icon: typeof Inbox }[] = [
+  { id: 'all', label: 'Tous', icon: Inbox },
+  { id: 'recrutement', label: 'Recrutement', icon: Users },
+  { id: 'business', label: 'Business', icon: Briefcase },
+  { id: 'communication', label: 'Communication', icon: MessageSquare },
+  { id: 'indesirables', label: 'Indésirables', icon: Trash2 },
 ]
 
 export function EmailFilters({ activeFilter, onFilterChange, counts }: EmailFiltersProps) {
@@ -50,12 +46,12 @@ export function EmailFilters({ activeFilter, onFilterChange, counts }: EmailFilt
         {filters.map((filter) => {
           const Icon = filter.icon
           const isActive = activeFilter === filter.id
-          const count = counts[filter.id]
+          const count = counts[filter.id] ?? 0
 
           return (
             <button
               key={filter.id}
-              onClick={() => onFilterChange(filter.id)}
+              onClick={() => onFilterChange(filter.id as EmailCategory | 'all')}
               className={`
                 flex items-center gap-2
                 h-9 px-3

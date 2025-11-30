@@ -25,9 +25,13 @@ interface EmailSelectorProps {
 export function EmailSelector({ onSelect, selectedId }: EmailSelectorProps) {
   const [searchQuery, setSearchQuery] = useState('')
 
-  // Filtrer les emails (exclure les spams)
+  // Filtrer les emails (exclure les spams et indésirables)
   const filteredEmails = useMemo(() => {
-    const nonSpamEmails = mockEmails.filter((e) => e.category !== 'spam')
+    const nonSpamEmails = mockEmails.filter((e) =>
+      e.category !== 'spam_evident' &&
+      e.category !== 'pub_promo' &&
+      e.category !== 'email_automatique'
+    )
 
     if (!searchQuery.trim()) {
       return nonSpamEmails

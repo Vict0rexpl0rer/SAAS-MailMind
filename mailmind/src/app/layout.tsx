@@ -6,13 +6,15 @@
  * Layout racine de l'application MailMind.
  * Définit les métadonnées, la police et la structure HTML de base.
  * Intègre le ThemeProvider pour le support dark/light mode.
+ * Intègre le TestModeProvider pour la simulation sans API externes.
  *
  * =============================================================================
  */
 
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Notable } from 'next/font/google'
 import { ThemeProvider } from '@/contexts/theme-context'
+import { TestModeProvider } from '@/contexts/test-mode-context'
 import './globals.css'
 
 /**
@@ -23,6 +25,15 @@ const inter = Inter({
   subsets: ['latin'],
   variable: '--font-open-sans',
   weight: ['400', '500', '600', '700'],
+})
+
+/**
+ * Police Notable - Pour le branding MIRA
+ */
+const notable = Notable({
+  subsets: ['latin'],
+  variable: '--font-notable',
+  weight: ['400'],
 })
 
 /**
@@ -59,7 +70,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr" className={inter.variable} suppressHydrationWarning>
+    <html lang="fr" className={`${inter.variable} ${notable.variable}`} suppressHydrationWarning>
       <head>
         {/* Script pour éviter le flash de thème incorrect */}
         <script
@@ -77,7 +88,9 @@ export default function RootLayout({
       </head>
       <body className="font-sans antialiased bg-[var(--bg-primary)] text-[var(--text-primary)]">
         <ThemeProvider>
-          {children}
+          <TestModeProvider>
+            {children}
+          </TestModeProvider>
         </ThemeProvider>
       </body>
     </html>

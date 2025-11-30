@@ -1,19 +1,19 @@
 /**
  * =============================================================================
- * COMPOSANT - EMAIL LIST ITEM
+ * COMPOSANT - EMAIL LIST ITEM V2
  * =============================================================================
  *
  * Élément de liste pour afficher un email dans la liste.
- * Affiche : expéditeur, sujet, aperçu, date, catégorie, pièces jointes.
+ * Affiche : expéditeur, sujet, aperçu, date, catégorie (21), CV, confiance IA.
  *
  * =============================================================================
  */
 
 'use client'
 
-import { Mail, Paperclip, Clock } from 'lucide-react'
+import { Paperclip, FileCheck, AlertCircle } from 'lucide-react'
 import { Email } from '@/types'
-import { Badge, emailCategoryBadge } from '@/components/ui'
+import { CategoryBadge, CVIndicator, DoubtIndicator } from '@/components/categories'
 
 /**
  * Props du composant
@@ -25,17 +25,6 @@ interface EmailListItemProps {
   onClick?: () => void
   /** Indique si l'email est sélectionné */
   isSelected?: boolean
-}
-
-/**
- * Labels pour les catégories d'email
- */
-const categoryLabels: Record<string, string> = {
-  cv: 'CV',
-  message: 'Message',
-  spam: 'Spam',
-  urgent: 'Urgent',
-  other: 'Autre',
 }
 
 /**
@@ -89,20 +78,36 @@ export function EmailListItem({ email, onClick, isSelected = false }: EmailListI
 
         {/* Contenu principal */}
         <div className="flex-1 min-w-0">
-          {/* Ligne 1 : Expéditeur + Date */}
-          <div className="flex items-center justify-between gap-4 mb-0.5">
-            <span
-              className={`
-                text-sm truncate
-                ${isUnread
-                  ? 'font-semibold text-[var(--text-primary)]'
-                  : 'font-medium text-[var(--text-secondary)]'
-                }
-              `}
-            >
-              {email.senderName}
-            </span>
-            <span className="text-xs text-[var(--text-tertiary)] whitespace-nowrap">
+          {/* Ligne 1 : Expéditeur + Indicateurs + Date */}
+          <div className="flex items-center justify-between gap-2 mb-0.5">
+            <div className="flex items-center gap-2 min-w-0">
+              <span
+                className={`
+                  text-sm truncate
+                  ${isUnread
+                    ? 'font-semibold text-[var(--text-primary)]'
+                    : 'font-medium text-[var(--text-secondary)]'
+                  }
+                `}
+              >
+                {email.senderName}
+              </span>
+
+              {/* Indicateurs inline */}
+              <div className="flex items-center gap-1 flex-shrink-0">
+                {/* Indicateur CV */}
+                {email.hasCv && (
+                  <CVIndicator size="sm" />
+                )}
+
+                {/* Indicateur doute */}
+                {email.isDoubtful && (
+                  <DoubtIndicator confidence={email.aiConfidence} size="sm" />
+                )}
+              </div>
+            </div>
+
+            <span className="text-xs text-[var(--text-tertiary)] whitespace-nowrap flex-shrink-0">
               {formatRelativeDate(email.receivedAt)}
             </span>
           </div>
@@ -125,12 +130,17 @@ export function EmailListItem({ email, onClick, isSelected = false }: EmailListI
             {email.preview}
           </p>
 
-          {/* Ligne 4 : Tags et indicateurs */}
-          <div className="flex items-center gap-2">
-            {/* Badge catégorie */}
-            <Badge variant={emailCategoryBadge[email.category]}>
-              {categoryLabels[email.category]}
-            </Badge>
+          {/* Ligne 4 : Badge catégorie et indicateurs */}
+          <div className="flex items-center gap-2 flex-wrap">
+            {/* Badge catégorie avec nouvelle version */}
+            <CategoryBadge
+              category={email.category}
+              showIcon={true}
+              shortLabel={true}
+              confidence={email.aiConfidence}
+              isDoubtful={email.isDoubtful}
+              size="sm"
+            />
 
             {/* Indicateur pièce jointe */}
             {email.hasAttachment && (
@@ -140,10 +150,17 @@ export function EmailListItem({ email, onClick, isSelected = false }: EmailListI
               </span>
             )}
 
-            {/* Score de confiance IA */}
-            {email.aiConfidence && (
+            {/* Score de confiance IA (affiché seulement si pas douteux) */}
+            {email.aiConfidence !== undefined && !email.isDoubtful && (
               <span className="text-xs text-[var(--text-tertiary)]">
                 IA: {email.aiConfidence}%
+              </span>
+            )}
+
+            {/* Indicateur de classification manuelle */}
+            {email.manuallyClassified && (
+              <span className="text-xs text-green-600 dark:text-green-400">
+                Classé manuellement
               </span>
             )}
           </div>

@@ -16,20 +16,46 @@
 import { Email, Candidate, EmailCategory, ExperienceLevel } from '@/types'
 
 /**
- * Prompt système pour la classification des emails
+ * Prompt système pour la classification des emails (21 catégories)
  */
 export const CLASSIFICATION_PROMPT = `Tu es un assistant spécialisé dans le tri d'emails pour les recruteurs.
-Tu dois classifier chaque email dans une des catégories suivantes :
-- "cv" : L'email contient un CV ou une candidature
-- "message" : Email professionnel standard (question, suivi, etc.)
-- "urgent" : Email nécessitant une action immédiate
-- "spam" : Email indésirable ou promotionnel
-- "other" : Autre type d'email
+Tu dois classifier chaque email dans une des 21 catégories suivantes :
+
+RECRUTEMENT :
+- "cv_spontane" : CV envoyé spontanément
+- "cv_offre" : CV en réponse à une offre d'emploi
+- "relance_candidat" : Relance d'un candidat
+- "refus_candidat" : Refus de candidature
+- "confirmation_entretien" : Confirmation d'entretien
+- "question_candidat" : Question d'un candidat
+
+BUSINESS :
+- "prospect_chaud" : Prospect potentiel intéressé
+- "client_existant" : Email d'un client actuel
+- "partenaire" : Communication partenaire
+- "fournisseur" : Communication fournisseur
+- "facture_paiement" : Factures et paiements
+- "devis_proposition" : Devis et propositions commerciales
+
+COMMUNICATION :
+- "equipe_interne" : Communication équipe interne
+- "notification_plateforme" : Notifications LinkedIn, Indeed, etc.
+- "newsletter_utile" : Newsletter pertinente
+- "newsletter_ignorable" : Newsletter non prioritaire
+
+INDÉSIRABLES :
+- "spam_evident" : Spam évident
+- "pub_promo" : Publicités et promotions
+- "email_automatique" : Emails automatiques (no-reply)
+
+AUTRE :
+- "non_classe" : Non classé / À trier manuellement
+- "doute" : Utilise cette catégorie si tu n'es pas sûr (confiance < 70%)
 
 Analyse le sujet, l'expéditeur et le contenu pour déterminer la catégorie.
 Retourne ta réponse en JSON avec la structure :
 {
-  "category": "cv|message|urgent|spam|other",
+  "category": "string (une des 21 catégories)",
   "confidence": 0-100,
   "reasoning": "Explication courte"
 }`
@@ -101,7 +127,7 @@ export async function classifyEmail(
 
   // Retourne un résultat placeholder
   return {
-    category: 'other',
+    category: 'non_classe',
     confidence: 0,
     reasoning: 'Classification non implémentée',
   }

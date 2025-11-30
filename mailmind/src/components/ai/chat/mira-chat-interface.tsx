@@ -123,6 +123,16 @@ export function MiraChatInterface() {
 
   return (
     <div className="relative flex flex-col h-full bg-[var(--bg-secondary)]">
+      {/* Header avec titre MIRA */}
+      <div className="sticky top-0 z-20 bg-[var(--bg-secondary)] border-b border-[var(--border-default)] px-6 py-4">
+        <h1
+          className="text-4xl text-[var(--text-primary)]"
+          style={{ fontFamily: 'var(--font-notable), sans-serif' }}
+        >
+          MIRA
+        </h1>
+      </div>
+
       {/* Zone des messages - scrollable avec padding pour la barre fixe */}
       <div className="flex-1 overflow-y-auto pb-32">
         <div className="max-w-3xl mx-auto px-4 py-8">

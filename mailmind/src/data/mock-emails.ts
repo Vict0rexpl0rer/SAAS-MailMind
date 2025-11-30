@@ -1,21 +1,20 @@
 /**
  * =============================================================================
- * DONNÉES MOCKÉES - EMAILS
+ * DONNÉES MOCKÉES - EMAILS (Legacy)
  * =============================================================================
  *
- * Ces données simulent les emails que nous recevrons de l'API Gmail.
- * Elles permettent de développer l'interface sans connexion réelle.
- *
- * Dans le futur, ces données seront remplacées par de vrais appels API.
+ * Ce fichier est maintenu pour la rétrocompatibilité.
+ * Pour les nouvelles fonctionnalités, utilisez les mock data V2
+ * dans /lib/test-mode/mock-emails-v2.ts
  *
  * =============================================================================
  */
 
-import { Email } from '@/types'
+import { Email, EmailCategory, EmailCategoryGroup } from '@/types'
 
 /**
  * Liste d'emails de démonstration
- * Couvre toutes les catégories : CV, messages, spam, urgent
+ * Mise à jour pour utiliser les 21 catégories
  */
 export const mockEmails: Email[] = [
   // ===== EMAILS CV =====
@@ -26,11 +25,16 @@ export const mockEmails: Email[] = [
     subject: 'Candidature - Développeuse Full Stack',
     preview: 'Bonjour, je vous envoie ma candidature pour le poste de développeuse Full Stack. Vous trouverez ci-joint mon CV...',
     receivedAt: new Date('2024-01-15T09:30:00'),
-    category: 'cv',
+    category: 'cv_spontane' as EmailCategory,
+    categoryGroup: 'recrutement' as EmailCategoryGroup,
     status: 'unread',
     hasAttachment: true,
     attachments: ['CV_Marie_Dupont.pdf'],
     aiConfidence: 95,
+    isDoubtful: false,
+    hasCv: true,
+    cvDetectionStep: 'full',
+    manuallyClassified: false,
   },
   {
     id: 'email-002',
@@ -39,11 +43,16 @@ export const mockEmails: Email[] = [
     subject: 'CV - Chef de projet digital',
     preview: 'Suite à votre annonce sur LinkedIn, je me permets de vous transmettre mon CV pour le poste de chef de projet...',
     receivedAt: new Date('2024-01-15T08:15:00'),
-    category: 'cv',
+    category: 'cv_offre' as EmailCategory,
+    categoryGroup: 'recrutement' as EmailCategoryGroup,
     status: 'read',
     hasAttachment: true,
     attachments: ['Thomas_Bernard_CV_2024.pdf', 'Lettre_motivation.pdf'],
     aiConfidence: 92,
+    isDoubtful: false,
+    hasCv: true,
+    cvDetectionStep: 'full',
+    manuallyClassified: false,
   },
   {
     id: 'email-003',
@@ -52,11 +61,16 @@ export const mockEmails: Email[] = [
     subject: 'Candidature spontanée - UX Designer',
     preview: 'Passionnée par le design et l\'expérience utilisateur, je souhaiterais rejoindre votre équipe en tant que UX Designer...',
     receivedAt: new Date('2024-01-14T16:45:00'),
-    category: 'cv',
+    category: 'cv_spontane' as EmailCategory,
+    categoryGroup: 'recrutement' as EmailCategoryGroup,
     status: 'unread',
     hasAttachment: true,
     attachments: ['CV_Sophie_Martin_UX.pdf', 'Portfolio.pdf'],
     aiConfidence: 88,
+    isDoubtful: false,
+    hasCv: true,
+    cvDetectionStep: 'full',
+    manuallyClassified: false,
   },
   {
     id: 'email-004',
@@ -65,14 +79,19 @@ export const mockEmails: Email[] = [
     subject: 'Demande de stage - Développeur Backend',
     preview: 'Étudiant en dernière année d\'école d\'ingénieur, je recherche un stage de fin d\'études dans le développement backend...',
     receivedAt: new Date('2024-01-14T11:20:00'),
-    category: 'cv',
+    category: 'cv_spontane' as EmailCategory,
+    categoryGroup: 'recrutement' as EmailCategoryGroup,
     status: 'read',
     hasAttachment: true,
     attachments: ['CV_Lucas_Petit.pdf'],
     aiConfidence: 90,
+    isDoubtful: false,
+    hasCv: true,
+    cvDetectionStep: 'full',
+    manuallyClassified: false,
   },
 
-  // ===== EMAILS MESSAGES =====
+  // ===== EMAILS BUSINESS =====
   {
     id: 'email-005',
     senderName: 'Jean-Pierre Moreau',
@@ -80,10 +99,15 @@ export const mockEmails: Email[] = [
     subject: 'Re: Réunion de suivi projet',
     preview: 'Bonjour, je vous confirme ma disponibilité pour la réunion de demain à 14h. Nous pourrons discuter de l\'avancement...',
     receivedAt: new Date('2024-01-15T10:00:00'),
-    category: 'message',
+    category: 'client_existant' as EmailCategory,
+    categoryGroup: 'business' as EmailCategoryGroup,
     status: 'read',
     hasAttachment: false,
     aiConfidence: 98,
+    isDoubtful: false,
+    hasCv: false,
+    cvDetectionStep: 'none',
+    manuallyClassified: false,
   },
   {
     id: 'email-006',
@@ -92,10 +116,15 @@ export const mockEmails: Email[] = [
     subject: 'Question sur le devis',
     preview: 'Bonjour, j\'aurais quelques questions concernant le devis que vous m\'avez envoyé la semaine dernière...',
     receivedAt: new Date('2024-01-15T07:30:00'),
-    category: 'message',
+    category: 'devis_proposition' as EmailCategory,
+    categoryGroup: 'business' as EmailCategoryGroup,
     status: 'unread',
     hasAttachment: false,
     aiConfidence: 96,
+    isDoubtful: false,
+    hasCv: false,
+    cvDetectionStep: 'none',
+    manuallyClassified: false,
   },
   {
     id: 'email-007',
@@ -104,14 +133,19 @@ export const mockEmails: Email[] = [
     subject: 'Proposition de collaboration',
     preview: 'Cher partenaire, nous souhaitons vous proposer une collaboration sur un nouveau projet innovant...',
     receivedAt: new Date('2024-01-13T15:00:00'),
-    category: 'message',
+    category: 'partenaire' as EmailCategory,
+    categoryGroup: 'business' as EmailCategoryGroup,
     status: 'read',
     hasAttachment: true,
     attachments: ['Proposition_collaboration.pdf'],
     aiConfidence: 94,
+    isDoubtful: false,
+    hasCv: false,
+    cvDetectionStep: 'none',
+    manuallyClassified: false,
   },
 
-  // ===== EMAILS URGENTS =====
+  // ===== EMAILS COMMUNICATION INTERNE =====
   {
     id: 'email-008',
     senderName: 'Direction RH',
@@ -119,11 +153,16 @@ export const mockEmails: Email[] = [
     subject: '[URGENT] Validation contrat avant 17h',
     preview: 'Merci de valider le contrat de Thomas Bernard avant 17h aujourd\'hui. Le candidat attend notre retour...',
     receivedAt: new Date('2024-01-15T11:00:00'),
-    category: 'urgent',
+    category: 'equipe_interne' as EmailCategory,
+    categoryGroup: 'communication' as EmailCategoryGroup,
     status: 'unread',
     hasAttachment: true,
     attachments: ['Contrat_Thomas_Bernard.pdf'],
     aiConfidence: 99,
+    isDoubtful: false,
+    hasCv: false,
+    cvDetectionStep: 'none',
+    manuallyClassified: false,
   },
   {
     id: 'email-009',
@@ -132,13 +171,18 @@ export const mockEmails: Email[] = [
     subject: '[ACTION REQUISE] Mise à jour de sécurité',
     preview: 'Une mise à jour critique de sécurité est disponible. Veuillez l\'appliquer dans les plus brefs délais...',
     receivedAt: new Date('2024-01-14T20:00:00'),
-    category: 'urgent',
+    category: 'notification_plateforme' as EmailCategory,
+    categoryGroup: 'communication' as EmailCategoryGroup,
     status: 'read',
     hasAttachment: false,
     aiConfidence: 97,
+    isDoubtful: false,
+    hasCv: false,
+    cvDetectionStep: 'none',
+    manuallyClassified: false,
   },
 
-  // ===== EMAILS SPAM =====
+  // ===== EMAILS INDÉSIRABLES =====
   {
     id: 'email-010',
     senderName: 'Promo Incroyable',
@@ -146,10 +190,15 @@ export const mockEmails: Email[] = [
     subject: 'Gagnez un iPhone 15 GRATUIT !!!',
     preview: 'Félicitations ! Vous avez été sélectionné pour gagner un iPhone 15 Pro Max. Cliquez ici pour réclamer...',
     receivedAt: new Date('2024-01-15T06:00:00'),
-    category: 'spam',
+    category: 'spam_evident' as EmailCategory,
+    categoryGroup: 'indesirables' as EmailCategoryGroup,
     status: 'read',
     hasAttachment: false,
     aiConfidence: 99,
+    isDoubtful: false,
+    hasCv: false,
+    cvDetectionStep: 'none',
+    manuallyClassified: false,
   },
   {
     id: 'email-011',
@@ -158,10 +207,15 @@ export const mockEmails: Email[] = [
     subject: 'Devenez millionnaire en 30 jours',
     preview: 'Notre système de trading automatique vous garantit des gains de 500% par mois. Inscrivez-vous maintenant...',
     receivedAt: new Date('2024-01-14T03:30:00'),
-    category: 'spam',
+    category: 'spam_evident' as EmailCategory,
+    categoryGroup: 'indesirables' as EmailCategoryGroup,
     status: 'read',
     hasAttachment: false,
     aiConfidence: 99,
+    isDoubtful: false,
+    hasCv: false,
+    cvDetectionStep: 'none',
+    manuallyClassified: false,
   },
   {
     id: 'email-012',
@@ -170,10 +224,15 @@ export const mockEmails: Email[] = [
     subject: 'Votre compte a été compromis',
     preview: 'Nous avons détecté une activité suspecte sur votre compte. Cliquez sur le lien suivant pour vérifier...',
     receivedAt: new Date('2024-01-13T22:00:00'),
-    category: 'spam',
+    category: 'spam_evident' as EmailCategory,
+    categoryGroup: 'indesirables' as EmailCategoryGroup,
     status: 'read',
     hasAttachment: false,
     aiConfidence: 99,
+    isDoubtful: false,
+    hasCv: false,
+    cvDetectionStep: 'none',
+    manuallyClassified: false,
   },
 
   // ===== AUTRES EMAILS =====
@@ -184,10 +243,15 @@ export const mockEmails: Email[] = [
     subject: 'Les tendances tech de la semaine',
     preview: 'Cette semaine : l\'IA générative révolutionne le recrutement, les nouveautés Next.js 14...',
     receivedAt: new Date('2024-01-15T05:00:00'),
-    category: 'other',
+    category: 'newsletter_utile' as EmailCategory,
+    categoryGroup: 'communication' as EmailCategoryGroup,
     status: 'unread',
     hasAttachment: false,
     aiConfidence: 85,
+    isDoubtful: false,
+    hasCv: false,
+    cvDetectionStep: 'none',
+    manuallyClassified: false,
   },
   {
     id: 'email-014',
@@ -196,17 +260,22 @@ export const mockEmails: Email[] = [
     subject: '5 personnes ont consulté votre profil',
     preview: 'Vous avez 5 nouvelles vues de profil cette semaine. Découvrez qui s\'intéresse à vous...',
     receivedAt: new Date('2024-01-14T18:00:00'),
-    category: 'other',
+    category: 'notification_plateforme' as EmailCategory,
+    categoryGroup: 'communication' as EmailCategoryGroup,
     status: 'read',
     hasAttachment: false,
     aiConfidence: 92,
+    isDoubtful: false,
+    hasCv: false,
+    cvDetectionStep: 'none',
+    manuallyClassified: false,
   },
 ]
 
 /**
  * Fonction helper pour filtrer les emails par catégorie
  */
-export function getEmailsByCategory(category: string): Email[] {
+export function getEmailsByCategory(category: EmailCategory | 'all'): Email[] {
   if (category === 'all') return mockEmails
   return mockEmails.filter(email => email.category === category)
 }
@@ -214,7 +283,7 @@ export function getEmailsByCategory(category: string): Email[] {
 /**
  * Fonction helper pour obtenir le nombre d'emails non lus par catégorie
  */
-export function getUnreadCountByCategory(category: string): number {
+export function getUnreadCountByCategory(category: EmailCategory | 'all'): number {
   const emails = category === 'all' ? mockEmails : mockEmails.filter(e => e.category === category)
   return emails.filter(email => email.status === 'unread').length
 }
@@ -225,7 +294,17 @@ export function getUnreadCountByCategory(category: string): number {
 export const emailStats = {
   total: mockEmails.length,
   unread: mockEmails.filter(e => e.status === 'unread').length,
-  cv: mockEmails.filter(e => e.category === 'cv').length,
-  urgent: mockEmails.filter(e => e.category === 'urgent').length,
-  spam: mockEmails.filter(e => e.category === 'spam').length,
+  byCategory: {
+    cv_spontane: mockEmails.filter(e => e.category === 'cv_spontane').length,
+    cv_offre: mockEmails.filter(e => e.category === 'cv_offre').length,
+    client_existant: mockEmails.filter(e => e.category === 'client_existant').length,
+    spam_evident: mockEmails.filter(e => e.category === 'spam_evident').length,
+  },
+  byGroup: {
+    recrutement: mockEmails.filter(e => e.categoryGroup === 'recrutement').length,
+    business: mockEmails.filter(e => e.categoryGroup === 'business').length,
+    communication: mockEmails.filter(e => e.categoryGroup === 'communication').length,
+    indesirables: mockEmails.filter(e => e.categoryGroup === 'indesirables').length,
+    autre: mockEmails.filter(e => e.categoryGroup === 'autre').length,
+  },
 }
