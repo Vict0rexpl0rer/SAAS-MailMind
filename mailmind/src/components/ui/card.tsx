@@ -4,7 +4,7 @@
  * =============================================================================
  *
  * Carte réutilisable pour afficher du contenu dans une boîte stylisée.
- * Design épuré avec ombre subtile style Apple.
+ * Design inspiré de Linear/Notion avec support dark/light mode.
  *
  * USAGE :
  * <Card>
@@ -36,9 +36,8 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
       <div
         ref={ref}
         className={`
-          bg-white rounded-2xl border border-blue-100
-          shadow-lg shadow-blue-200/50
-          ${hoverable ? 'transition-shadow hover:shadow-xl hover:shadow-blue-300/50' : ''}
+          bg-[var(--surface-default)] rounded-xl border border-[var(--border-default)]
+          ${hoverable ? 'transition-all duration-200 hover:border-[var(--border-strong)] hover:shadow-md cursor-pointer' : ''}
           ${className}
         `}
         {...props}
@@ -59,7 +58,7 @@ export const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
     return (
       <div
         ref={ref}
-        className={`px-6 py-4 border-b border-blue-100 ${className}`}
+        className={`px-5 py-4 border-b border-[var(--border-subtle)] ${className}`}
         {...props}
       >
         {children}
@@ -78,7 +77,7 @@ export const CardTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadi
     return (
       <h3
         ref={ref}
-        className={`text-lg font-semibold text-slate-900 ${className}`}
+        className={`text-base font-semibold text-[var(--text-primary)] ${className}`}
         {...props}
       >
         {children}
@@ -97,7 +96,7 @@ export const CardDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<H
     return (
       <p
         ref={ref}
-        className={`text-sm text-slate-500 mt-1 ${className}`}
+        className={`text-sm text-[var(--text-secondary)] mt-1 ${className}`}
         {...props}
       >
         {children}
@@ -116,7 +115,7 @@ export const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElem
     return (
       <div
         ref={ref}
-        className={`px-6 py-4 ${className}`}
+        className={`px-5 py-4 ${className}`}
         {...props}
       >
         {children}
@@ -135,7 +134,7 @@ export const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
     return (
       <div
         ref={ref}
-        className={`px-6 py-4 border-t border-blue-100 ${className}`}
+        className={`px-5 py-4 border-t border-[var(--border-subtle)] ${className}`}
         {...props}
       >
         {children}

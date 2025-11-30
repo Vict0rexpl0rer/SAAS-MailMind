@@ -61,20 +61,20 @@ export function EmailSelector({ onSelect, selectedId }: EmailSelectorProps) {
     <div className="space-y-4">
       {/* Barre de recherche */}
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-tertiary)]" />
         <input
           type="text"
           placeholder="Rechercher un email..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full pl-10 pr-4 py-2.5 bg-white border border-blue-200 rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition-colors"
+          className="w-full pl-10 pr-4 py-2.5 bg-[var(--bg-primary)] border border-[var(--border-default)] rounded-xl text-sm text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:outline-none focus:ring-2 focus:ring-[var(--accent-primary)]/50 focus:border-transparent transition-colors"
         />
       </div>
 
       {/* Liste des emails */}
       <div className="space-y-2 max-h-[400px] overflow-y-auto">
         {filteredEmails.length === 0 ? (
-          <p className="text-center text-slate-500 py-8">
+          <p className="text-center text-[var(--text-tertiary)] py-8">
             Aucun email trouvé
           </p>
         ) : (
@@ -84,7 +84,7 @@ export function EmailSelector({ onSelect, selectedId }: EmailSelectorProps) {
               hoverable
               className={`
                 p-3 cursor-pointer transition-all duration-200
-                ${selectedId === email.id ? 'ring-2 ring-blue-500 bg-blue-50' : ''}
+                ${selectedId === email.id ? 'ring-2 ring-[var(--accent-primary)] bg-[var(--accent-primary)]/5' : ''}
               `}
               onClick={() => onSelect(email)}
             >
@@ -92,31 +92,31 @@ export function EmailSelector({ onSelect, selectedId }: EmailSelectorProps) {
                 {/* Icône */}
                 <div className={`
                   w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0
-                  ${email.status === 'unread' ? 'bg-blue-100' : 'bg-slate-100'}
+                  ${email.status === 'unread' ? 'bg-[var(--accent-primary)]/10' : 'bg-[var(--surface-default)]'}
                 `}>
-                  <Mail className={`w-5 h-5 ${email.status === 'unread' ? 'text-blue-600' : 'text-slate-400'}`} />
+                  <Mail className={`w-5 h-5 ${email.status === 'unread' ? 'text-[var(--accent-primary)]' : 'text-[var(--text-tertiary)]'}`} />
                 </div>
 
                 {/* Contenu */}
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-2 mb-0.5">
-                    <span className={`text-sm truncate ${email.status === 'unread' ? 'font-semibold text-slate-900' : 'text-slate-700'}`}>
+                    <span className={`text-sm truncate ${email.status === 'unread' ? 'font-semibold text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}>
                       {email.senderName}
                     </span>
-                    <span className="text-xs text-slate-400 flex-shrink-0">
+                    <span className="text-xs text-[var(--text-tertiary)] flex-shrink-0">
                       {formatDate(email.receivedAt)}
                     </span>
                   </div>
-                  <p className={`text-sm truncate ${email.status === 'unread' ? 'font-medium text-slate-800' : 'text-slate-600'}`}>
+                  <p className={`text-sm truncate ${email.status === 'unread' ? 'font-medium text-[var(--text-primary)]' : 'text-[var(--text-secondary)]'}`}>
                     {email.subject}
                   </p>
-                  <p className="text-xs text-slate-400 truncate mt-0.5">
+                  <p className="text-xs text-[var(--text-tertiary)] truncate mt-0.5">
                     {email.preview}
                   </p>
                   {email.hasAttachment && (
                     <div className="flex items-center gap-1 mt-1">
-                      <Paperclip className="w-3 h-3 text-slate-400" />
-                      <span className="text-xs text-slate-400">
+                      <Paperclip className="w-3 h-3 text-[var(--text-tertiary)]" />
+                      <span className="text-xs text-[var(--text-tertiary)]">
                         {email.attachments?.length} pièce(s) jointe(s)
                       </span>
                     </div>
@@ -124,7 +124,7 @@ export function EmailSelector({ onSelect, selectedId }: EmailSelectorProps) {
                 </div>
 
                 {/* Flèche de sélection */}
-                <ChevronRight className={`w-5 h-5 flex-shrink-0 transition-colors ${selectedId === email.id ? 'text-blue-500' : 'text-slate-300'}`} />
+                <ChevronRight className={`w-5 h-5 flex-shrink-0 transition-colors ${selectedId === email.id ? 'text-[var(--accent-primary)]' : 'text-[var(--text-tertiary)]'}`} />
               </div>
             </Card>
           ))
@@ -132,7 +132,7 @@ export function EmailSelector({ onSelect, selectedId }: EmailSelectorProps) {
       </div>
 
       {/* Info */}
-      <p className="text-xs text-slate-400 text-center">
+      <p className="text-xs text-[var(--text-tertiary)] text-center">
         {filteredEmails.length} email(s) disponible(s)
       </p>
     </div>

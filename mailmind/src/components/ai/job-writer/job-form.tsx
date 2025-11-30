@@ -83,7 +83,7 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <FileText className="w-5 h-5 text-purple-600" />
+          <FileText className="w-5 h-5 text-[var(--accent-primary)]" />
           Détails de l'offre
         </CardTitle>
       </CardHeader>
@@ -91,8 +91,8 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
         <form onSubmit={handleSubmit} className="space-y-5">
           {/* Titre du poste */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-700">
-              Titre du poste <span className="text-red-500">*</span>
+            <label className="block text-sm font-medium text-[var(--text-secondary)]">
+              Titre du poste <span className="text-[var(--error)]">*</span>
             </label>
             <Input
               placeholder="Ex: Développeur Full Stack React/Node.js"
@@ -105,7 +105,7 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
           {/* Entreprise et localisation */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-slate-700">
+              <label className="block text-sm font-medium text-[var(--text-secondary)]">
                 Entreprise
               </label>
               <Input
@@ -115,7 +115,7 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
               />
             </div>
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-slate-700">
+              <label className="block text-sm font-medium text-[var(--text-secondary)]">
                 Localisation
               </label>
               <Input
@@ -128,7 +128,7 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
 
           {/* Type de contrat */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-700">
+            <label className="block text-sm font-medium text-[var(--text-secondary)]">
               Type de contrat
             </label>
             <div className="flex flex-wrap gap-2">
@@ -140,8 +140,8 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
                   className={`
                     px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200
                     ${contractType === type.value
-                      ? 'bg-purple-600 text-white'
-                      : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
+                      ? 'bg-[var(--accent-primary)] text-white'
+                      : 'bg-[var(--surface-default)] text-[var(--text-secondary)] border border-[var(--border-default)] hover:bg-[var(--surface-hover)]'
                     }
                   `}
                 >
@@ -153,7 +153,7 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
 
           {/* Télétravail */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-700">
+            <label className="block text-sm font-medium text-[var(--text-secondary)]">
               Télétravail
             </label>
             <div className="flex flex-wrap gap-2">
@@ -165,8 +165,8 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
                   className={`
                     px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200
                     ${remote === option.value
-                      ? 'bg-purple-600 text-white'
-                      : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
+                      ? 'bg-[var(--accent-primary)] text-white'
+                      : 'bg-[var(--surface-default)] text-[var(--text-secondary)] border border-[var(--border-default)] hover:bg-[var(--surface-hover)]'
                     }
                   `}
                 >
@@ -178,7 +178,7 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
 
           {/* Niveau d'expérience */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-700">
+            <label className="block text-sm font-medium text-[var(--text-secondary)]">
               Niveau d'expérience
             </label>
             <div className="flex flex-wrap gap-2">
@@ -190,8 +190,8 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
                   className={`
                     px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200
                     ${experienceLevel === level.value
-                      ? 'bg-purple-600 text-white'
-                      : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
+                      ? 'bg-[var(--accent-primary)] text-white'
+                      : 'bg-[var(--surface-default)] text-[var(--text-secondary)] border border-[var(--border-default)] hover:bg-[var(--surface-hover)]'
                     }
                   `}
                 >
@@ -203,7 +203,7 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
 
           {/* Compétences */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-700">
+            <label className="block text-sm font-medium text-[var(--text-secondary)]">
               Compétences clés
             </label>
             <div className="flex gap-2">
@@ -227,13 +227,13 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
                 {skills.map((skill) => (
                   <span
                     key={skill}
-                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-purple-100 text-purple-700 rounded-full text-sm"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] rounded-full text-sm"
                   >
                     {skill}
                     <button
                       type="button"
                       onClick={() => removeSkill(skill)}
-                      className="hover:text-purple-900"
+                      className="hover:opacity-70"
                     >
                       <X className="w-3 h-3" />
                     </button>
@@ -245,9 +245,9 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
 
           {/* Salaire */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-700">
+            <label className="block text-sm font-medium text-[var(--text-secondary)]">
               Fourchette salariale
-              <span className="text-slate-400 font-normal ml-1">(optionnel)</span>
+              <span className="text-[var(--text-tertiary)] font-normal ml-1">(optionnel)</span>
             </label>
             <Input
               placeholder="Ex: 45-55K€ / an"
@@ -258,9 +258,9 @@ export function JobForm({ onGenerate, isLoading }: JobFormProps) {
 
           {/* Description additionnelle */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-slate-700">
+            <label className="block text-sm font-medium text-[var(--text-secondary)]">
               Description additionnelle
-              <span className="text-slate-400 font-normal ml-1">(optionnel)</span>
+              <span className="text-[var(--text-tertiary)] font-normal ml-1">(optionnel)</span>
             </label>
             <Textarea
               placeholder="Ajoutez des informations spécifiques sur le poste, l'équipe, les avantages..."

@@ -28,15 +28,15 @@ export function ChatMessage({ message }: ChatMessageProps) {
         className={`
           w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0
           ${isUser
-            ? 'bg-gradient-to-br from-violet-500 to-purple-600 shadow-md shadow-purple-300/30'
-            : 'bg-pink-200 shadow-md shadow-pink-200/30'
+            ? 'bg-[var(--accent-primary)] shadow-md dark:shadow-black/30'
+            : 'bg-[var(--accent-primary)]/20 shadow-md dark:shadow-black/20'
           }
         `}
       >
         {isUser ? (
           <User className="w-5 h-5 text-white" />
         ) : (
-          <Sparkles className="w-5 h-5 text-pink-600" />
+          <Sparkles className="w-5 h-5 text-[var(--accent-primary)]" />
         )}
       </div>
 
@@ -45,8 +45,8 @@ export function ChatMessage({ message }: ChatMessageProps) {
         className={`
           max-w-[75%] rounded-2xl px-4 py-3
           ${isUser
-            ? 'bg-gradient-to-br from-violet-500 to-purple-600 text-white rounded-tr-sm shadow-md shadow-purple-300/30'
-            : 'bg-white/80 backdrop-blur-sm border border-pink-100 text-slate-700 rounded-tl-sm shadow-sm'
+            ? 'bg-[var(--accent-primary)] text-white rounded-tr-sm shadow-md dark:shadow-black/30'
+            : 'bg-[var(--bg-elevated)] backdrop-blur-sm border border-[var(--border-default)] text-[var(--text-secondary)] rounded-tl-sm shadow-sm'
           }
         `}
       >
@@ -54,7 +54,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
           {message.content}
         </p>
         <span
-          className={`text-xs mt-2 block ${isUser ? 'text-purple-200' : 'text-slate-400'}`}
+          className={`text-xs mt-2 block ${isUser ? 'text-white/70' : 'text-[var(--text-tertiary)]'}`}
         >
           {new Date(message.timestamp).toLocaleTimeString('fr-FR', {
             hour: '2-digit',

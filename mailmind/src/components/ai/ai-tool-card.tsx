@@ -30,24 +30,24 @@ const ICON_MAP: Record<string, typeof MessageSquare> = {
 
 const COLOR_CLASSES: Record<string, { bg: string; text: string; border: string }> = {
   blue: {
-    bg: 'bg-blue-100',
-    text: 'text-blue-600',
-    border: 'border-blue-200',
+    bg: 'bg-blue-500/10 dark:bg-blue-500/20',
+    text: 'text-blue-600 dark:text-blue-400',
+    border: 'border-blue-200 dark:border-blue-500/30',
   },
   green: {
-    bg: 'bg-green-100',
-    text: 'text-green-600',
-    border: 'border-green-200',
+    bg: 'bg-emerald-500/10 dark:bg-emerald-500/20',
+    text: 'text-emerald-600 dark:text-emerald-400',
+    border: 'border-emerald-200 dark:border-emerald-500/30',
   },
   purple: {
-    bg: 'bg-purple-100',
-    text: 'text-purple-600',
-    border: 'border-purple-200',
+    bg: 'bg-purple-500/10 dark:bg-purple-500/20',
+    text: 'text-purple-600 dark:text-purple-400',
+    border: 'border-purple-200 dark:border-purple-500/30',
   },
   orange: {
-    bg: 'bg-orange-100',
-    text: 'text-orange-600',
-    border: 'border-orange-200',
+    bg: 'bg-orange-500/10 dark:bg-orange-500/20',
+    text: 'text-orange-600 dark:text-orange-400',
+    border: 'border-orange-200 dark:border-orange-500/30',
   },
 }
 
@@ -80,28 +80,28 @@ export function AIToolCard({ tool }: AIToolCardProps) {
           {/* Contenu */}
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-1">
-              <h3 className="text-lg font-semibold text-slate-900">
+              <h3 className="text-lg font-semibold text-[var(--text-primary)]">
                 {tool.name}
               </h3>
               {tool.status === 'beta' && (
-                <span className="px-2 py-0.5 text-xs font-medium bg-amber-100 text-amber-700 rounded-full">
+                <span className="px-2 py-0.5 text-xs font-medium bg-[var(--warning-subtle)] text-[var(--warning)] rounded-full">
                   Beta
                 </span>
               )}
               {tool.status === 'coming_soon' && (
-                <span className="px-2 py-0.5 text-xs font-medium bg-slate-100 text-slate-500 rounded-full">
+                <span className="px-2 py-0.5 text-xs font-medium bg-[var(--surface-hover)] text-[var(--text-tertiary)] rounded-full">
                   Bientôt
                 </span>
               )}
             </div>
-            <p className="text-sm text-slate-500">
+            <p className="text-sm text-[var(--text-secondary)]">
               {tool.description}
             </p>
           </div>
 
           {/* Flèche */}
           <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-            <ArrowRight className="w-5 h-5 text-slate-400" />
+            <ArrowRight className="w-5 h-5 text-[var(--text-tertiary)]" />
           </div>
         </div>
       </Card>

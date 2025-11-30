@@ -34,9 +34,9 @@ export function JobPreview({ posting, isLoading, error }: JobPreviewProps) {
 
   if (error) {
     return (
-      <Card className="border-red-200 bg-red-50">
+      <Card className="border-[var(--error)]/30 bg-[var(--error-subtle)]">
         <CardContent className="py-6">
-          <div className="flex items-center gap-3 text-red-600">
+          <div className="flex items-center gap-3 text-[var(--error)]">
             <AlertCircle className="w-5 h-5" />
             <p className="text-sm">{error}</p>
           </div>
@@ -50,20 +50,20 @@ export function JobPreview({ posting, isLoading, error }: JobPreviewProps) {
       <Card>
         <CardContent className="py-8">
           <div className="flex flex-col items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center animate-pulse">
-              <FileText className="w-6 h-6 text-purple-600" />
+            <div className="w-12 h-12 rounded-xl bg-[var(--accent-primary)]/10 flex items-center justify-center animate-pulse">
+              <FileText className="w-6 h-6 text-[var(--accent-primary)]" />
             </div>
             <div className="text-center">
-              <p className="text-sm font-medium text-slate-700">Rédaction en cours...</p>
-              <p className="text-xs text-slate-400 mt-1">L'IA génère votre offre d'emploi</p>
+              <p className="text-sm font-medium text-[var(--text-primary)]">Rédaction en cours...</p>
+              <p className="text-xs text-[var(--text-tertiary)] mt-1">L'IA génère votre offre d'emploi</p>
             </div>
             <div className="w-full space-y-3 mt-4">
-              <div className="h-6 bg-slate-200 rounded animate-pulse w-3/4" />
-              <div className="h-4 bg-slate-200 rounded animate-pulse w-full" />
-              <div className="h-4 bg-slate-200 rounded animate-pulse w-full" />
-              <div className="h-4 bg-slate-200 rounded animate-pulse w-5/6" />
-              <div className="h-4 bg-slate-200 rounded animate-pulse w-full" />
-              <div className="h-4 bg-slate-200 rounded animate-pulse w-4/5" />
+              <div className="h-6 bg-[var(--surface-hover)] rounded animate-pulse w-3/4" />
+              <div className="h-4 bg-[var(--surface-hover)] rounded animate-pulse w-full" />
+              <div className="h-4 bg-[var(--surface-hover)] rounded animate-pulse w-full" />
+              <div className="h-4 bg-[var(--surface-hover)] rounded animate-pulse w-5/6" />
+              <div className="h-4 bg-[var(--surface-hover)] rounded animate-pulse w-full" />
+              <div className="h-4 bg-[var(--surface-hover)] rounded animate-pulse w-4/5" />
             </div>
           </div>
         </CardContent>
@@ -75,7 +75,7 @@ export function JobPreview({ posting, isLoading, error }: JobPreviewProps) {
     return (
       <Card>
         <CardContent className="py-8">
-          <div className="flex flex-col items-center gap-3 text-slate-400">
+          <div className="flex flex-col items-center gap-3 text-[var(--text-tertiary)]">
             <FileText className="w-8 h-8" />
             <p className="text-sm text-center">
               Remplissez les détails de l'offre<br />et cliquez sur "Générer"
@@ -92,8 +92,8 @@ export function JobPreview({ posting, isLoading, error }: JobPreviewProps) {
         {/* En-tête */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-purple-600" />
-            <span className="font-medium text-slate-900">Offre générée</span>
+            <Sparkles className="w-5 h-5 text-[var(--accent-primary)]" />
+            <span className="font-medium text-[var(--text-primary)]">Offre générée</span>
           </div>
           <Button variant="ghost" size="sm" onClick={handleCopy}>
             {copied ? (
@@ -111,24 +111,24 @@ export function JobPreview({ posting, isLoading, error }: JobPreviewProps) {
         </div>
 
         {/* Titre */}
-        <div className="bg-purple-50 rounded-xl p-4">
-          <h3 className="text-lg font-semibold text-slate-900">{posting.title}</h3>
+        <div className="bg-[var(--accent-primary)]/10 rounded-xl p-4">
+          <h3 className="text-lg font-semibold text-[var(--text-primary)]">{posting.title}</h3>
         </div>
 
         {/* Contenu */}
-        <div className="bg-slate-50 rounded-xl p-4 max-h-[400px] overflow-y-auto">
-          <div className="prose prose-sm prose-slate max-w-none">
+        <div className="bg-[var(--surface-default)] rounded-xl p-4 max-h-[400px] overflow-y-auto">
+          <div className="prose prose-sm max-w-none">
             {posting.content.split('\n').map((paragraph, index) => {
               if (paragraph.startsWith('## ')) {
                 return (
-                  <h4 key={index} className="text-base font-semibold text-slate-900 mt-4 mb-2">
+                  <h4 key={index} className="text-base font-semibold text-[var(--text-primary)] mt-4 mb-2">
                     {paragraph.replace('## ', '')}
                   </h4>
                 )
               }
               if (paragraph.startsWith('- ')) {
                 return (
-                  <li key={index} className="text-sm text-slate-700 ml-4">
+                  <li key={index} className="text-sm text-[var(--text-secondary)] ml-4">
                     {paragraph.replace('- ', '')}
                   </li>
                 )
@@ -137,7 +137,7 @@ export function JobPreview({ posting, isLoading, error }: JobPreviewProps) {
                 return <br key={index} />
               }
               return (
-                <p key={index} className="text-sm text-slate-700 mb-2">
+                <p key={index} className="text-sm text-[var(--text-secondary)] mb-2">
                   {paragraph}
                 </p>
               )

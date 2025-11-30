@@ -69,12 +69,12 @@ export default function JobWriterPage() {
         subtitle="Générez des offres d'emploi attractives et optimisées SEO"
       />
 
-      <div className="flex-1 overflow-auto p-6 bg-blue-50">
+      <div className="flex-1 overflow-auto p-6 bg-[var(--bg-secondary)]">
         <div className="max-w-5xl mx-auto">
           {/* Retour */}
           <Link
             href="/dashboard/ia"
-            className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 mb-6 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] mb-6 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Retour aux outils IA

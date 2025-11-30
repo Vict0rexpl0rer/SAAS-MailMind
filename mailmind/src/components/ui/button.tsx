@@ -4,12 +4,13 @@
  * =============================================================================
  *
  * Bouton réutilisable avec plusieurs variantes et tailles.
- * Design minimaliste style Apple.
+ * Design inspiré de Linear/Notion avec support dark/light mode.
  *
  * USAGE :
  * <Button variant="primary" size="md">Texte</Button>
  * <Button variant="secondary" size="sm">Texte</Button>
  * <Button variant="ghost">Texte</Button>
+ * <Button variant="icon" size="icon-md"><Icon /></Button>
  *
  * =============================================================================
  */
@@ -19,12 +20,12 @@ import { ButtonHTMLAttributes, forwardRef } from 'react'
 /**
  * Types de variantes disponibles pour le bouton
  */
-type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger'
+type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'icon'
 
 /**
  * Tailles disponibles pour le bouton
  */
-type ButtonSize = 'sm' | 'md' | 'lg'
+type ButtonSize = 'sm' | 'md' | 'lg' | 'icon-sm' | 'icon-md' | 'icon-lg'
 
 /**
  * Props du composant Button
@@ -39,22 +40,44 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 /**
- * Classes Tailwind pour chaque variante
+ * Classes Tailwind pour chaque variante (light + dark mode)
  */
 const variantClasses: Record<ButtonVariant, string> = {
-  primary: 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg shadow-blue-300/50',
-  secondary: 'bg-white text-slate-700 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 shadow-lg shadow-blue-200/50',
-  ghost: 'bg-transparent text-slate-600 hover:bg-blue-100 hover:text-slate-900',
-  danger: 'bg-red-600 text-white hover:bg-red-700 shadow-lg shadow-red-300/50',
+  primary: `
+    bg-[var(--accent-primary)] hover:bg-[var(--accent-hover)] active:bg-[var(--accent-active)]
+    text-white font-semibold
+    shadow-sm hover:shadow-md
+  `,
+  secondary: `
+    bg-[var(--surface-default)] hover:bg-[var(--surface-hover)] active:bg-[var(--surface-active)]
+    text-[var(--text-primary)]
+    border border-[var(--border-strong)]
+  `,
+  ghost: `
+    bg-transparent hover:bg-[var(--surface-hover)] active:bg-[var(--surface-active)]
+    text-[var(--text-secondary)] hover:text-[var(--text-primary)]
+  `,
+  danger: `
+    bg-[var(--error)] hover:opacity-90 active:opacity-80
+    text-white font-semibold
+    shadow-sm
+  `,
+  icon: `
+    bg-transparent hover:bg-[var(--surface-hover)] active:bg-[var(--surface-active)]
+    text-[var(--text-tertiary)] hover:text-[var(--text-primary)]
+  `,
 }
 
 /**
  * Classes Tailwind pour chaque taille
  */
 const sizeClasses: Record<ButtonSize, string> = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-4 py-2 text-sm',
-  lg: 'px-6 py-3 text-base',
+  sm: 'h-8 px-3 text-xs rounded-md',
+  md: 'h-10 px-4 text-sm rounded-lg',
+  lg: 'h-11 px-5 text-sm rounded-lg',
+  'icon-sm': 'h-8 w-8 rounded-md',
+  'icon-md': 'h-9 w-9 rounded-lg',
+  'icon-lg': 'h-10 w-10 rounded-lg',
 }
 
 /**
@@ -69,10 +92,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || isLoading}
         className={`
           inline-flex items-center justify-center gap-2
-          font-medium rounded-lg
+          font-medium
           transition-all duration-200
-          focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2
-          disabled:opacity-50 disabled:cursor-not-allowed
+          focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus-ring)] focus-visible:ring-offset-2
+          focus-visible:ring-offset-[var(--bg-primary)]
+          disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none
           ${variantClasses[variant]}
           ${sizeClasses[size]}
           ${className}

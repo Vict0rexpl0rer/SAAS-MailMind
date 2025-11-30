@@ -49,19 +49,19 @@ export function ChatInput({ onSend, isLoading, disabled }: ChatInputProps) {
 
   return (
     <form onSubmit={handleSubmit} className="relative">
-      <div className="flex items-end gap-3 bg-white/90 backdrop-blur-sm rounded-2xl border border-pink-200/50 p-3 shadow-lg shadow-pink-100/30">
+      <div className="flex items-end gap-3 bg-[var(--bg-elevated)] backdrop-blur-sm rounded-2xl border border-[var(--border-default)] p-3 shadow-lg dark:shadow-black/20">
         {/* Icônes à gauche */}
         <div className="flex items-center gap-1">
           <button
             type="button"
-            className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-pink-50 transition-colors"
+            className="p-2 rounded-lg text-[var(--text-tertiary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)] transition-colors"
             title="Pièce jointe (bientôt disponible)"
           >
             <Paperclip className="w-5 h-5" />
           </button>
           <button
             type="button"
-            className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-pink-50 transition-colors"
+            className="p-2 rounded-lg text-[var(--text-tertiary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)] transition-colors"
             title="Paramètres (bientôt disponible)"
           >
             <Settings className="w-5 h-5" />
@@ -77,14 +77,14 @@ export function ChatInput({ onSend, isLoading, disabled }: ChatInputProps) {
           placeholder={disabled ? "Configurez une clé API pour utiliser l'assistant" : "Comment puis-je vous aider aujourd'hui?"}
           disabled={disabled || isLoading}
           rows={1}
-          className="flex-1 resize-none border-0 bg-transparent py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex-1 resize-none border-0 bg-transparent py-2 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-tertiary)] focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
         />
 
         {/* Icônes à droite */}
         <div className="flex items-center gap-1">
           <button
             type="button"
-            className="p-2 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-pink-50 transition-colors"
+            className="p-2 rounded-lg text-[var(--text-tertiary)] hover:text-[var(--text-primary)] hover:bg-[var(--surface-hover)] transition-colors"
             title="Dictée vocale (bientôt disponible)"
           >
             <Mic className="w-5 h-5" />
@@ -94,11 +94,11 @@ export function ChatInput({ onSend, isLoading, disabled }: ChatInputProps) {
             disabled={!message.trim() || isLoading || disabled}
             className="
               p-2.5 rounded-xl
-              bg-pink-500 hover:bg-pink-600
+              bg-[var(--accent-primary)] hover:bg-[var(--accent-hover)]
               text-white
               disabled:opacity-50 disabled:cursor-not-allowed
               transition-all duration-200
-              shadow-md shadow-pink-300/30
+              shadow-md dark:shadow-black/30
             "
           >
             {isLoading ? (

@@ -66,20 +66,23 @@ export function EmailListItem({ email, onClick, isSelected = false }: EmailListI
     <article
       onClick={onClick}
       className={`
-        p-4 border-b border-blue-100
+        px-4 py-3.5 border-b border-[var(--border-subtle)]
         cursor-pointer
-        transition-colors duration-200
-        ${isSelected ? 'bg-blue-100' : 'hover:bg-blue-50'}
-        ${isUnread ? 'bg-blue-50/70' : ''}
+        transition-colors duration-150
+        ${isSelected
+          ? 'bg-[var(--accent-primary)]/10'
+          : 'hover:bg-[var(--surface-hover)]'
+        }
+        ${isUnread && !isSelected ? 'bg-[var(--accent-primary)]/5' : ''}
       `}
     >
-      <div className="flex items-start gap-4">
+      <div className="flex items-start gap-3">
         {/* Indicateur de non-lu */}
-        <div className="pt-1">
+        <div className="pt-1.5 flex-shrink-0">
           <div
             className={`
-              w-2.5 h-2.5 rounded-full
-              ${isUnread ? 'bg-blue-500' : 'bg-transparent'}
+              w-2 h-2 rounded-full transition-colors
+              ${isUnread ? 'bg-[var(--accent-primary)]' : 'bg-transparent'}
             `}
           />
         </div>
@@ -87,17 +90,19 @@ export function EmailListItem({ email, onClick, isSelected = false }: EmailListI
         {/* Contenu principal */}
         <div className="flex-1 min-w-0">
           {/* Ligne 1 : Expéditeur + Date */}
-          <div className="flex items-center justify-between gap-4 mb-1">
+          <div className="flex items-center justify-between gap-4 mb-0.5">
             <span
               className={`
                 text-sm truncate
-                ${isUnread ? 'font-semibold text-slate-900' : 'font-medium text-slate-700'}
+                ${isUnread
+                  ? 'font-semibold text-[var(--text-primary)]'
+                  : 'font-medium text-[var(--text-secondary)]'
+                }
               `}
             >
               {email.senderName}
             </span>
-            <span className="flex items-center gap-1 text-xs text-slate-400 whitespace-nowrap">
-              <Clock className="w-3 h-3" />
+            <span className="text-xs text-[var(--text-tertiary)] whitespace-nowrap">
               {formatRelativeDate(email.receivedAt)}
             </span>
           </div>
@@ -105,15 +110,18 @@ export function EmailListItem({ email, onClick, isSelected = false }: EmailListI
           {/* Ligne 2 : Sujet */}
           <h3
             className={`
-              text-sm truncate mb-1
-              ${isUnread ? 'font-medium text-slate-900' : 'text-slate-700'}
+              text-sm truncate mb-0.5
+              ${isUnread
+                ? 'font-medium text-[var(--text-primary)]'
+                : 'text-[var(--text-secondary)]'
+              }
             `}
           >
             {email.subject}
           </h3>
 
           {/* Ligne 3 : Aperçu */}
-          <p className="text-sm text-slate-500 truncate mb-2">
+          <p className="text-[13px] text-[var(--text-tertiary)] truncate mb-2">
             {email.preview}
           </p>
 
@@ -126,7 +134,7 @@ export function EmailListItem({ email, onClick, isSelected = false }: EmailListI
 
             {/* Indicateur pièce jointe */}
             {email.hasAttachment && (
-              <span className="flex items-center gap-1 text-xs text-slate-400">
+              <span className="flex items-center gap-1 text-xs text-[var(--text-tertiary)]">
                 <Paperclip className="w-3 h-3" />
                 {email.attachments?.length || 1}
               </span>
@@ -134,16 +142,11 @@ export function EmailListItem({ email, onClick, isSelected = false }: EmailListI
 
             {/* Score de confiance IA */}
             {email.aiConfidence && (
-              <span className="text-xs text-slate-400">
+              <span className="text-xs text-[var(--text-tertiary)]">
                 IA: {email.aiConfidence}%
               </span>
             )}
           </div>
-        </div>
-
-        {/* Icône email */}
-        <div className="text-slate-300">
-          <Mail className="w-5 h-5" />
         </div>
       </div>
     </article>

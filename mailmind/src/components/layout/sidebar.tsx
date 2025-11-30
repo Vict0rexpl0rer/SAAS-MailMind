@@ -4,7 +4,8 @@
  * =============================================================================
  *
  * Barre de navigation latérale du dashboard avec effet hover expand.
- * Style "carte flottante" inspiré du design Acet Labs.
+ * Style "carte flottante" inspiré du design Linear/Notion.
+ * Support complet dark/light mode avec variables CSS.
  *
  * Comportement :
  * - Par défaut (collapsed) : ~72px, icônes seulement
@@ -93,27 +94,29 @@ export function Sidebar() {
         className="
           w-[72px] group-hover:w-64
           h-full
-          bg-white rounded-2xl shadow-lg shadow-blue-200/50 border border-blue-100
+          bg-[var(--bg-elevated)] rounded-2xl
+          shadow-lg dark:shadow-black/40
+          border border-[var(--border-default)]
           flex flex-col
           overflow-hidden
-          group-hover:shadow-xl group-hover:shadow-blue-300/50
+          group-hover:shadow-xl
         "
         style={{
           transition: 'width 500ms cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 300ms ease'
         }}
       >
         {/* Header - Logo et nom */}
-        <div className="p-4 border-b border-blue-100">
+        <div className="p-4 border-b border-[var(--border-subtle)]">
           <Link href="/dashboard/emails" className="flex items-center gap-3">
             <div className="
-              w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center flex-shrink-0
+              w-10 h-10 bg-[var(--accent-primary)] rounded-xl flex items-center justify-center flex-shrink-0
               transition-transform duration-300 ease-out
               group-hover:scale-105
             ">
               <Mail className="w-5 h-5 text-white" />
             </div>
             <span
-              className={`${textTransitionClasses} text-xl font-semibold text-slate-900`}
+              className={`${textTransitionClasses} text-xl font-semibold text-[var(--text-primary)]`}
               style={{ transitionDelay: '0ms' }}
             >
               MailMind
@@ -126,7 +129,7 @@ export function Sidebar() {
           {/* Section Navigation */}
           <div className="mb-4">
             <p
-              className={`${textTransitionClasses} px-3 mb-2 text-xs font-semibold text-slate-400 uppercase tracking-wider`}
+              className={`${textTransitionClasses} px-3 mb-2 text-xs font-semibold text-[var(--text-tertiary)] uppercase tracking-wider`}
               style={{ transitionDelay: '0ms' }}
             >
               Navigation
@@ -147,8 +150,8 @@ export function Sidebar() {
                         text-sm font-medium
                         transition-colors duration-200
                         ${isActive
-                          ? 'bg-blue-600 text-white'
-                          : 'text-slate-600 hover:bg-blue-100 hover:text-slate-900'
+                          ? 'bg-[var(--accent-primary)] text-white'
+                          : 'text-[var(--text-secondary)] hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)]'
                         }
                       `}
                     >
@@ -169,14 +172,14 @@ export function Sidebar() {
                       {item.badge !== undefined && item.badge > 0 && (
                         <span
                           className={`
-                            px-2 py-0.5 text-xs rounded-full
+                            px-2 py-0.5 text-xs rounded-full font-medium
                             opacity-0 group-hover:opacity-100
                             scale-90 group-hover:scale-100
                             transition-[opacity,transform]
                             duration-75 group-hover:duration-300
                             ${isActive
-                              ? 'bg-white text-slate-900'
-                              : 'bg-blue-200 text-slate-700'
+                              ? 'bg-white/20 text-white'
+                              : 'bg-[var(--accent-primary)]/15 text-[var(--accent-primary)]'
                             }
                           `}
                           style={{ transitionDelay: `${delayIn + 20}ms` }}
@@ -194,7 +197,7 @@ export function Sidebar() {
           {/* Section Catégories */}
           <div>
             <p
-              className={`${textTransitionClasses} px-3 mb-2 text-xs font-semibold text-slate-400 uppercase tracking-wider`}
+              className={`${textTransitionClasses} px-3 mb-2 text-xs font-semibold text-[var(--text-tertiary)] uppercase tracking-wider`}
               style={{ transitionDelay: '0ms' }}
             >
               Catégories
@@ -211,8 +214,8 @@ export function Sidebar() {
                       className="
                         flex items-center gap-3
                         px-3 py-2 rounded-lg
-                        text-sm text-slate-600
-                        hover:bg-blue-100 hover:text-slate-900
+                        text-sm text-[var(--text-secondary)]
+                        hover:bg-[var(--surface-hover)] hover:text-[var(--text-primary)]
                         transition-colors duration-200
                       "
                     >
@@ -232,17 +235,17 @@ export function Sidebar() {
         </nav>
 
         {/* Section utilisateur en bas */}
-        <div className="mt-auto p-4 border-t border-blue-100">
+        <div className="mt-auto p-4 border-t border-[var(--border-subtle)]">
           <div className="flex items-center gap-3">
             <div className="
-              w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0
+              w-10 h-10 rounded-full bg-[var(--accent-primary)] flex items-center justify-center flex-shrink-0
               transition-transform duration-300 ease-out
               group-hover:scale-105
             ">
               <span className="text-white font-medium text-sm">VI</span>
             </div>
             <span
-              className="opacity-0 group-hover:opacity-100 translate-x-[-8px] group-hover:translate-x-0 transition-[opacity,transform] duration-75 group-hover:duration-300 ease-out whitespace-nowrap text-sm font-medium text-slate-900"
+              className="opacity-0 group-hover:opacity-100 translate-x-[-8px] group-hover:translate-x-0 transition-[opacity,transform] duration-75 group-hover:duration-300 ease-out whitespace-nowrap text-sm font-medium text-[var(--text-primary)]"
               style={{ transitionDelay: '150ms' }}
             >
               Victor

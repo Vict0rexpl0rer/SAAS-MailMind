@@ -5,6 +5,7 @@
  *
  * Layout partagé par toutes les pages du dashboard.
  * Inclut la sidebar flottante et structure la mise en page principale.
+ * Support dark/light mode avec design inspiré de Linear.
  *
  * La sidebar est en position fixed avec effet hover expand.
  * Le contenu principal a un margin-left pour compenser la sidebar collapsed.
@@ -30,7 +31,7 @@ export default function DashboardLayout({
   children: React.ReactNode
 }) {
   return (
-    <div className="min-h-screen bg-blue-50">
+    <div className="min-h-screen bg-[var(--bg-secondary)]">
       {/* Sidebar - fixed position avec hover expand */}
       <Sidebar />
 

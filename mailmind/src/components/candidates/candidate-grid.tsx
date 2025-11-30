@@ -66,25 +66,25 @@ export function CandidateGrid() {
   }
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col bg-[var(--bg-primary)] rounded-xl border border-[var(--border-default)] overflow-hidden">
       {/* Barre d'actions */}
-      <div className="flex items-center justify-between p-4 bg-white border-b border-blue-100 shadow-lg shadow-blue-200/30 rounded-t-2xl">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border-subtle)]">
         <div className="flex items-center gap-2">
-          <Users className="w-5 h-5 text-blue-500" />
-          <span className="text-sm text-slate-600">
+          <Users className="w-4 h-4 text-[var(--accent-primary)]" />
+          <span className="text-sm text-[var(--text-secondary)]">
             {filteredCandidates.length} candidat{filteredCandidates.length > 1 ? 's' : ''}
           </span>
         </div>
 
         {/* Toggle vue grille/liste */}
-        <div className="flex items-center gap-1 bg-blue-100 rounded-lg p-1">
+        <div className="flex items-center gap-0.5 bg-[var(--surface-hover)] rounded-lg p-0.5">
           <button
             onClick={() => setViewMode('grid')}
             className={`
-              p-1.5 rounded-md transition-colors
+              p-1.5 rounded-md transition-all duration-150
               ${viewMode === 'grid'
-                ? 'bg-white text-slate-900 shadow-sm'
-                : 'text-slate-500 hover:text-slate-700'
+                ? 'bg-[var(--bg-primary)] text-[var(--text-primary)] shadow-sm'
+                : 'text-[var(--text-tertiary)] hover:text-[var(--text-primary)]'
               }
             `}
             title="Vue grille"
@@ -94,10 +94,10 @@ export function CandidateGrid() {
           <button
             onClick={() => setViewMode('list')}
             className={`
-              p-1.5 rounded-md transition-colors
+              p-1.5 rounded-md transition-all duration-150
               ${viewMode === 'list'
-                ? 'bg-white text-slate-900 shadow-sm'
-                : 'text-slate-500 hover:text-slate-700'
+                ? 'bg-[var(--bg-primary)] text-[var(--text-primary)] shadow-sm'
+                : 'text-[var(--text-tertiary)] hover:text-[var(--text-primary)]'
               }
             `}
             title="Vue liste"
@@ -108,7 +108,7 @@ export function CandidateGrid() {
       </div>
 
       {/* Filtres */}
-      <div className="border-b border-blue-100">
+      <div className="border-b border-[var(--border-subtle)]">
         <CandidateFilters
           activeFilter={activeFilter}
           onFilterChange={setActiveFilter}
@@ -117,12 +117,13 @@ export function CandidateGrid() {
       </div>
 
       {/* Grille/Liste des candidats */}
-      <div className="flex-1 overflow-auto p-6 bg-blue-50">
+      <div className="flex-1 overflow-auto p-5 bg-[var(--bg-secondary)]">
         {sortedCandidates.length === 0 ? (
           // État vide
           <div className="flex flex-col items-center justify-center h-64 text-center">
-            <Users className="w-12 h-12 text-slate-300 mb-4" />
-            <p className="text-slate-500">Aucun candidat dans cette catégorie</p>
+            <Users className="w-16 h-16 text-[var(--text-disabled)] mb-4" />
+            <p className="text-[var(--text-secondary)] font-medium">Aucun candidat dans cette catégorie</p>
+            <p className="text-sm text-[var(--text-tertiary)] mt-1">Les candidats apparaîtront ici</p>
           </div>
         ) : viewMode === 'grid' ? (
           // Vue grille
@@ -150,8 +151,8 @@ export function CandidateGrid() {
       </div>
 
       {/* Footer avec informations */}
-      <div className="p-3 bg-white border-t border-blue-100 text-center rounded-b-2xl">
-        <p className="text-xs text-slate-400">
+      <div className="px-4 py-2.5 border-t border-[var(--border-subtle)] text-center">
+        <p className="text-xs text-[var(--text-tertiary)]">
           {sortedCandidates.length} candidat{sortedCandidates.length > 1 ? 's' : ''} affiché{sortedCandidates.length > 1 ? 's' : ''}
           {' • '}
           Données de démonstration

@@ -32,9 +32,9 @@ export function EmailPreview({ email, isLoading, error }: EmailPreviewProps) {
 
   if (error) {
     return (
-      <Card className="border-red-200 bg-red-50">
+      <Card className="border-[var(--error)]/30 bg-[var(--error-subtle)]">
         <CardContent className="py-6">
-          <div className="flex items-center gap-3 text-red-600">
+          <div className="flex items-center gap-3 text-[var(--error)]">
             <Mail className="w-5 h-5" />
             <p className="text-sm">{error}</p>
           </div>
@@ -48,19 +48,19 @@ export function EmailPreview({ email, isLoading, error }: EmailPreviewProps) {
       <Card>
         <CardContent className="py-8">
           <div className="flex flex-col items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center animate-pulse">
-              <Mail className="w-6 h-6 text-green-600" />
+            <div className="w-12 h-12 rounded-xl bg-[var(--success-subtle)] flex items-center justify-center animate-pulse">
+              <Mail className="w-6 h-6 text-[var(--success)]" />
             </div>
             <div className="text-center">
-              <p className="text-sm font-medium text-slate-700">Rédaction en cours...</p>
-              <p className="text-xs text-slate-400 mt-1">L'IA génère votre email</p>
+              <p className="text-sm font-medium text-[var(--text-secondary)]">Rédaction en cours...</p>
+              <p className="text-xs text-[var(--text-tertiary)] mt-1">L'IA génère votre email</p>
             </div>
             <div className="w-full space-y-3 mt-4">
-              <div className="h-6 bg-slate-200 rounded animate-pulse w-2/3" />
-              <div className="h-4 bg-slate-200 rounded animate-pulse w-full" />
-              <div className="h-4 bg-slate-200 rounded animate-pulse w-full" />
-              <div className="h-4 bg-slate-200 rounded animate-pulse w-4/5" />
-              <div className="h-4 bg-slate-200 rounded animate-pulse w-full" />
+              <div className="h-6 bg-[var(--surface-hover)] rounded animate-pulse w-2/3" />
+              <div className="h-4 bg-[var(--surface-hover)] rounded animate-pulse w-full" />
+              <div className="h-4 bg-[var(--surface-hover)] rounded animate-pulse w-full" />
+              <div className="h-4 bg-[var(--surface-hover)] rounded animate-pulse w-4/5" />
+              <div className="h-4 bg-[var(--surface-hover)] rounded animate-pulse w-full" />
             </div>
           </div>
         </CardContent>
@@ -72,7 +72,7 @@ export function EmailPreview({ email, isLoading, error }: EmailPreviewProps) {
     return (
       <Card>
         <CardContent className="py-8">
-          <div className="flex flex-col items-center gap-3 text-slate-400">
+          <div className="flex flex-col items-center gap-3 text-[var(--text-tertiary)]">
             <Mail className="w-8 h-8" />
             <p className="text-sm text-center">
               Configurez les paramètres et cliquez<br />sur "Générer" pour créer votre email
@@ -88,14 +88,14 @@ export function EmailPreview({ email, isLoading, error }: EmailPreviewProps) {
       <CardContent className="py-6 space-y-4">
         {/* En-tête */}
         <div className="flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-green-600" />
-          <span className="font-medium text-slate-900">Email généré</span>
+          <Sparkles className="w-5 h-5 text-[var(--success)]" />
+          <span className="font-medium text-[var(--text-primary)]">Email généré</span>
         </div>
 
         {/* Objet */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-slate-600">Objet</label>
+            <label className="text-sm font-medium text-[var(--text-secondary)]">Objet</label>
             <Button
               variant="ghost"
               size="sm"
@@ -103,7 +103,7 @@ export function EmailPreview({ email, isLoading, error }: EmailPreviewProps) {
             >
               {copiedField === 'subject' ? (
                 <>
-                  <Check className="w-3 h-3 mr-1 text-green-600" />
+                  <Check className="w-3 h-3 mr-1 text-[var(--success)]" />
                   Copié
                 </>
               ) : (
@@ -114,15 +114,15 @@ export function EmailPreview({ email, isLoading, error }: EmailPreviewProps) {
               )}
             </Button>
           </div>
-          <div className="bg-slate-50 rounded-lg p-3 border border-slate-200">
-            <p className="text-sm text-slate-900 font-medium">{email.subject}</p>
+          <div className="bg-[var(--surface-hover)] rounded-lg p-3 border border-[var(--border-default)]">
+            <p className="text-sm text-[var(--text-primary)] font-medium">{email.subject}</p>
           </div>
         </div>
 
         {/* Corps */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label className="text-sm font-medium text-slate-600">Corps de l'email</label>
+            <label className="text-sm font-medium text-[var(--text-secondary)]">Corps de l'email</label>
             <Button
               variant="ghost"
               size="sm"
@@ -130,7 +130,7 @@ export function EmailPreview({ email, isLoading, error }: EmailPreviewProps) {
             >
               {copiedField === 'body' ? (
                 <>
-                  <Check className="w-3 h-3 mr-1 text-green-600" />
+                  <Check className="w-3 h-3 mr-1 text-[var(--success)]" />
                   Copié
                 </>
               ) : (
@@ -141,8 +141,8 @@ export function EmailPreview({ email, isLoading, error }: EmailPreviewProps) {
               )}
             </Button>
           </div>
-          <div className="bg-slate-50 rounded-lg p-4 border border-slate-200 max-h-[400px] overflow-y-auto">
-            <p className="text-sm text-slate-700 whitespace-pre-wrap leading-relaxed">
+          <div className="bg-[var(--surface-hover)] rounded-lg p-4 border border-[var(--border-default)] max-h-[400px] overflow-y-auto">
+            <p className="text-sm text-[var(--text-secondary)] whitespace-pre-wrap leading-relaxed">
               {email.body}
             </p>
           </div>

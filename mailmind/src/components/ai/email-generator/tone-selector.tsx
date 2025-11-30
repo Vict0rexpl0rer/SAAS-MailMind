@@ -27,7 +27,7 @@ const TONES: { value: EmailTone; description: string }[] = [
 export function ToneSelector({ value, onChange }: ToneSelectorProps) {
   return (
     <div className="space-y-2">
-      <label className="block text-sm font-medium text-slate-700">
+      <label className="block text-sm font-medium text-[var(--text-secondary)]">
         Ton de l'email
       </label>
       <div className="grid grid-cols-3 gap-2">
@@ -39,8 +39,8 @@ export function ToneSelector({ value, onChange }: ToneSelectorProps) {
             className={`
               px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200
               ${value === tone.value
-                ? 'bg-blue-600 text-white shadow-md shadow-blue-300/50'
-                : 'bg-white text-slate-700 border border-blue-200 hover:bg-blue-50'
+                ? 'bg-[var(--accent-primary)] text-white shadow-md'
+                : 'bg-[var(--surface-default)] text-[var(--text-secondary)] border border-[var(--border-default)] hover:bg-[var(--surface-hover)]'
               }
             `}
           >
@@ -48,7 +48,7 @@ export function ToneSelector({ value, onChange }: ToneSelectorProps) {
           </button>
         ))}
       </div>
-      <p className="text-xs text-slate-400">
+      <p className="text-xs text-[var(--text-tertiary)]">
         {TONES.find((t) => t.value === value)?.description}
       </p>
     </div>

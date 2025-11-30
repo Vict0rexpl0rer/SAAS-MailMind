@@ -70,17 +70,17 @@ export function EmailList() {
   }
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col bg-[var(--bg-primary)] rounded-xl border border-[var(--border-default)] overflow-hidden">
       {/* Barre d'actions */}
-      <div className="flex items-center justify-between p-4 bg-white border-b border-blue-100 shadow-lg shadow-blue-200/30 rounded-t-2xl">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-[var(--border-subtle)]">
         <div className="flex items-center gap-2">
-          <Mail className="w-5 h-5 text-blue-500" />
-          <span className="text-sm text-slate-600">
+          <Mail className="w-4 h-4 text-[var(--accent-primary)]" />
+          <span className="text-sm text-[var(--text-secondary)]">
             {emailStats.unread} non lu{emailStats.unread > 1 ? 's' : ''}
           </span>
         </div>
         <Button
-          variant="secondary"
+          variant="ghost"
           size="sm"
           onClick={handleRefresh}
           isLoading={isRefreshing}
@@ -98,12 +98,13 @@ export function EmailList() {
       />
 
       {/* Liste des emails */}
-      <div className="flex-1 overflow-auto bg-white">
+      <div className="flex-1 overflow-auto">
         {sortedEmails.length === 0 ? (
           // État vide
           <div className="flex flex-col items-center justify-center h-64 text-center">
-            <Mail className="w-12 h-12 text-slate-300 mb-4" />
-            <p className="text-slate-500">Aucun email dans cette catégorie</p>
+            <Mail className="w-16 h-16 text-[var(--text-disabled)] mb-4" />
+            <p className="text-[var(--text-secondary)] font-medium">Aucun email dans cette catégorie</p>
+            <p className="text-sm text-[var(--text-tertiary)] mt-1">Les emails apparaîtront ici</p>
           </div>
         ) : (
           // Liste des emails
@@ -121,8 +122,8 @@ export function EmailList() {
       </div>
 
       {/* Footer avec informations */}
-      <div className="p-3 bg-blue-50 border-t border-blue-100 text-center rounded-b-2xl">
-        <p className="text-xs text-slate-400">
+      <div className="px-4 py-2.5 border-t border-[var(--border-subtle)] text-center">
+        <p className="text-xs text-[var(--text-tertiary)]">
           {sortedEmails.length} email{sortedEmails.length > 1 ? 's' : ''} affiché{sortedEmails.length > 1 ? 's' : ''}
           {' • '}
           Données de démonstration

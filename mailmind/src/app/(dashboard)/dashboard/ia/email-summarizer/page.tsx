@@ -81,12 +81,12 @@ export default function EmailSummarizerPage() {
         subtitle="Obtenez un résumé rapide de vos emails"
       />
 
-      <div className="flex-1 overflow-auto p-6 bg-blue-50">
+      <div className="flex-1 overflow-auto p-6 bg-[var(--bg-secondary)]">
         <div className="max-w-5xl mx-auto">
           {/* Retour */}
           <Link
             href="/dashboard/ia"
-            className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 mb-6 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] mb-6 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Retour aux outils IA
@@ -114,10 +114,10 @@ export default function EmailSummarizerPage() {
                   <CardContent className="py-4">
                     <div className="flex items-start justify-between gap-4">
                       <div className="min-w-0">
-                        <p className="text-sm font-medium text-slate-900 truncate">
+                        <p className="text-sm font-medium text-[var(--text-primary)] truncate">
                           {selectedEmail.subject}
                         </p>
-                        <p className="text-xs text-slate-500 mt-0.5">
+                        <p className="text-xs text-[var(--text-tertiary)] mt-0.5">
                           De : {selectedEmail.senderName}
                         </p>
                       </div>

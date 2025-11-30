@@ -24,26 +24,26 @@ const SENTIMENT_CONFIG: Record<Sentiment, { icon: typeof CheckCircle; label: str
   positive: {
     icon: CheckCircle,
     label: 'Positif',
-    color: 'text-green-600 bg-green-100',
+    color: 'text-[var(--success)] bg-[var(--success)]/10',
   },
   neutral: {
     icon: MinusCircle,
     label: 'Neutre',
-    color: 'text-slate-600 bg-slate-100',
+    color: 'text-[var(--text-secondary)] bg-[var(--surface-default)]',
   },
   negative: {
     icon: AlertCircle,
     label: 'Négatif',
-    color: 'text-red-600 bg-red-100',
+    color: 'text-[var(--error)] bg-[var(--error)]/10',
   },
 }
 
 export function SummaryDisplay({ summary, isLoading, error }: SummaryDisplayProps) {
   if (error) {
     return (
-      <Card className="border-red-200 bg-red-50">
+      <Card className="border-[var(--error)]/30 bg-[var(--error-subtle)]">
         <CardContent className="py-6">
-          <div className="flex items-center gap-3 text-red-600">
+          <div className="flex items-center gap-3 text-[var(--error)]">
             <AlertCircle className="w-5 h-5" />
             <p className="text-sm">{error}</p>
           </div>
@@ -57,18 +57,18 @@ export function SummaryDisplay({ summary, isLoading, error }: SummaryDisplayProp
       <Card>
         <CardContent className="py-8">
           <div className="flex flex-col items-center gap-4">
-            <div className="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center animate-pulse">
-              <Sparkles className="w-6 h-6 text-blue-600" />
+            <div className="w-12 h-12 rounded-xl bg-[var(--accent-primary)]/10 flex items-center justify-center animate-pulse">
+              <Sparkles className="w-6 h-6 text-[var(--accent-primary)]" />
             </div>
             <div className="text-center">
-              <p className="text-sm font-medium text-slate-700">Analyse en cours...</p>
-              <p className="text-xs text-slate-400 mt-1">L'IA résume votre email</p>
+              <p className="text-sm font-medium text-[var(--text-primary)]">Analyse en cours...</p>
+              <p className="text-xs text-[var(--text-tertiary)] mt-1">L'IA résume votre email</p>
             </div>
             {/* Skeleton */}
             <div className="w-full space-y-3 mt-4">
-              <div className="h-4 bg-slate-200 rounded animate-pulse w-full" />
-              <div className="h-4 bg-slate-200 rounded animate-pulse w-3/4" />
-              <div className="h-4 bg-slate-200 rounded animate-pulse w-5/6" />
+              <div className="h-4 bg-[var(--surface-hover)] rounded animate-pulse w-full" />
+              <div className="h-4 bg-[var(--surface-hover)] rounded animate-pulse w-3/4" />
+              <div className="h-4 bg-[var(--surface-hover)] rounded animate-pulse w-5/6" />
             </div>
           </div>
         </CardContent>
@@ -80,7 +80,7 @@ export function SummaryDisplay({ summary, isLoading, error }: SummaryDisplayProp
     return (
       <Card>
         <CardContent className="py-8">
-          <div className="flex flex-col items-center gap-3 text-slate-400">
+          <div className="flex flex-col items-center gap-3 text-[var(--text-tertiary)]">
             <Sparkles className="w-8 h-8" />
             <p className="text-sm text-center">
               Sélectionnez un email pour obtenir<br />un résumé généré par l'IA
@@ -100,8 +100,8 @@ export function SummaryDisplay({ summary, isLoading, error }: SummaryDisplayProp
         {/* En-tête avec sentiment */}
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Sparkles className="w-5 h-5 text-blue-600" />
-            <span className="font-medium text-slate-900">Résumé IA</span>
+            <Sparkles className="w-5 h-5 text-[var(--accent-primary)]" />
+            <span className="font-medium text-[var(--text-primary)]">Résumé IA</span>
           </div>
           <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-sm ${sentimentConfig.color}`}>
             <SentimentIcon className="w-4 h-4" />
@@ -110,8 +110,8 @@ export function SummaryDisplay({ summary, isLoading, error }: SummaryDisplayProp
         </div>
 
         {/* Résumé principal */}
-        <div className="bg-blue-50 rounded-xl p-4">
-          <p className="text-sm text-slate-700 leading-relaxed">
+        <div className="bg-[var(--accent-primary)]/10 rounded-xl p-4">
+          <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
             {summary.summary}
           </p>
         </div>
@@ -119,11 +119,11 @@ export function SummaryDisplay({ summary, isLoading, error }: SummaryDisplayProp
         {/* Points clés */}
         {summary.keyPoints && summary.keyPoints.length > 0 && (
           <div>
-            <h4 className="text-sm font-medium text-slate-900 mb-2">Points clés</h4>
+            <h4 className="text-sm font-medium text-[var(--text-primary)] mb-2">Points clés</h4>
             <ul className="space-y-2">
               {summary.keyPoints.map((point, index) => (
-                <li key={index} className="flex items-start gap-2 text-sm text-slate-600">
-                  <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center flex-shrink-0 text-xs font-medium">
+                <li key={index} className="flex items-start gap-2 text-sm text-[var(--text-secondary)]">
+                  <span className="w-5 h-5 rounded-full bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] flex items-center justify-center flex-shrink-0 text-xs font-medium">
                     {index + 1}
                   </span>
                   {point}
@@ -135,10 +135,10 @@ export function SummaryDisplay({ summary, isLoading, error }: SummaryDisplayProp
 
         {/* Actions suggérées */}
         {summary.suggestedActions && summary.suggestedActions.length > 0 && (
-          <div className="border-t border-blue-100 pt-4">
+          <div className="border-t border-[var(--border-default)] pt-4">
             <div className="flex items-center gap-2 mb-2">
-              <Lightbulb className="w-4 h-4 text-amber-500" />
-              <h4 className="text-sm font-medium text-slate-900">Actions suggérées</h4>
+              <Lightbulb className="w-4 h-4 text-[var(--warning)]" />
+              <h4 className="text-sm font-medium text-[var(--text-primary)]">Actions suggérées</h4>
             </div>
             <div className="flex flex-wrap gap-2">
               {summary.suggestedActions.map((action, index) => (

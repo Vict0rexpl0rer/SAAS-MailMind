@@ -50,47 +50,49 @@ const filters = [
 
 export function CandidateFilters({ activeFilter, onFilterChange, counts }: CandidateFiltersProps) {
   return (
-    <div className="flex items-center gap-2 p-4 bg-white overflow-x-auto">
-      {filters.map((filter) => {
-        const Icon = filter.icon
-        const isActive = activeFilter === filter.id
-        const count = counts[filter.id] || 0
+    <div className="flex items-center gap-1.5 px-4 py-3 border-b border-[var(--border-subtle)] overflow-x-auto">
+      <div className="flex items-center gap-1 p-1 bg-[var(--surface-hover)] rounded-[10px]">
+        {filters.map((filter) => {
+          const Icon = filter.icon
+          const isActive = activeFilter === filter.id
+          const count = counts[filter.id] || 0
 
-        return (
-          <button
-            key={filter.id}
-            onClick={() => onFilterChange(filter.id)}
-            className={`
-              flex items-center gap-2
-              px-3 py-1.5
-              rounded-lg
-              text-sm font-medium
-              whitespace-nowrap
-              transition-all duration-200
-              ${isActive
-                ? 'bg-blue-600 text-white shadow-lg shadow-blue-300/50'
-                : 'bg-blue-100 text-blue-600 hover:bg-blue-200'
-              }
-            `}
-          >
-            <Icon className="w-4 h-4" />
-            <span>{filter.label}</span>
-            {count > 0 && (
-              <span
-                className={`
-                  px-1.5 py-0.5 text-xs rounded-full
-                  ${isActive
-                    ? 'bg-white/20 text-white'
-                    : 'bg-blue-200 text-blue-500'
-                  }
-                `}
-              >
-                {count}
-              </span>
-            )}
-          </button>
-        )
-      })}
+          return (
+            <button
+              key={filter.id}
+              onClick={() => onFilterChange(filter.id)}
+              className={`
+                flex items-center gap-2
+                h-9 px-3
+                rounded-lg
+                text-[13px] font-medium
+                whitespace-nowrap
+                transition-all duration-150
+                ${isActive
+                  ? 'bg-[var(--bg-primary)] text-[var(--text-primary)] shadow-sm'
+                  : 'text-[var(--text-tertiary)] hover:text-[var(--text-primary)]'
+                }
+              `}
+            >
+              <Icon className="w-4 h-4" />
+              <span>{filter.label}</span>
+              {count > 0 && (
+                <span
+                  className={`
+                    min-w-[20px] h-5 px-1.5 text-[11px] rounded-md flex items-center justify-center font-semibold
+                    ${isActive
+                      ? 'bg-[var(--accent-primary)]/15 text-[var(--accent-primary)]'
+                      : 'bg-[var(--surface-default)] text-[var(--text-tertiary)]'
+                    }
+                  `}
+                >
+                  {count}
+                </span>
+              )}
+            </button>
+          )
+        })}
+      </div>
     </div>
   )
 }

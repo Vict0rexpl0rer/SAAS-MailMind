@@ -85,12 +85,12 @@ export default function EmailGeneratorPage() {
         subtitle="Créez des emails professionnels en quelques clics"
       />
 
-      <div className="flex-1 overflow-auto p-6 bg-blue-50">
+      <div className="flex-1 overflow-auto p-6 bg-[var(--bg-secondary)]">
         <div className="max-w-5xl mx-auto">
           {/* Retour */}
           <Link
             href="/dashboard/ia"
-            className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 mb-6 transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-[var(--text-primary)] mb-6 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Retour aux outils IA
@@ -101,7 +101,7 @@ export default function EmailGeneratorPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Mail className="w-5 h-5 text-blue-600" />
+                  <Mail className="w-5 h-5 text-[var(--accent-primary)]" />
                   Configurer l'email
                 </CardTitle>
               </CardHeader>
@@ -109,7 +109,7 @@ export default function EmailGeneratorPage() {
                 <form onSubmit={(e) => { e.preventDefault(); handleGenerate(); }} className="space-y-5">
                   {/* Type d'email */}
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-slate-700">
+                    <label className="block text-sm font-medium text-[var(--text-secondary)]">
                       Type d'email
                     </label>
                     <div className="grid grid-cols-2 gap-2">
@@ -124,8 +124,8 @@ export default function EmailGeneratorPage() {
                           className={`
                             px-3 py-2 rounded-xl text-sm text-left transition-all duration-200
                             ${emailType === template.type
-                              ? 'bg-blue-600 text-white shadow-md shadow-blue-300/50'
-                              : 'bg-white text-slate-700 border border-blue-200 hover:bg-blue-50'
+                              ? 'bg-[var(--accent-primary)] text-white shadow-md'
+                              : 'bg-[var(--surface-default)] text-[var(--text-secondary)] border border-[var(--border-default)] hover:bg-[var(--surface-hover)]'
                             }
                           `}
                         >
@@ -134,7 +134,7 @@ export default function EmailGeneratorPage() {
                       ))}
                     </div>
                     {selectedTemplate && (
-                      <p className="text-xs text-slate-400">{selectedTemplate.description}</p>
+                      <p className="text-xs text-[var(--text-tertiary)]">{selectedTemplate.description}</p>
                     )}
                   </div>
 
@@ -143,7 +143,7 @@ export default function EmailGeneratorPage() {
 
                   {/* Nom du candidat */}
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-slate-700">
+                    <label className="block text-sm font-medium text-[var(--text-secondary)]">
                       Nom du candidat
                     </label>
                     <Input
@@ -155,7 +155,7 @@ export default function EmailGeneratorPage() {
 
                   {/* Poste */}
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-slate-700">
+                    <label className="block text-sm font-medium text-[var(--text-secondary)]">
                       Poste concerné
                     </label>
                     <Input
@@ -167,9 +167,9 @@ export default function EmailGeneratorPage() {
 
                   {/* Nom de l'entreprise */}
                   <div className="space-y-2">
-                    <label className="block text-sm font-medium text-slate-700">
+                    <label className="block text-sm font-medium text-[var(--text-secondary)]">
                       Nom de l'entreprise
-                      <span className="text-slate-400 font-normal ml-1">(optionnel)</span>
+                      <span className="text-[var(--text-tertiary)] font-normal ml-1">(optionnel)</span>
                     </label>
                     <Input
                       placeholder="Ex: MailMind"
@@ -181,7 +181,7 @@ export default function EmailGeneratorPage() {
                   {/* Instructions personnalisées */}
                   {emailType === 'custom' && (
                     <div className="space-y-2">
-                      <label className="block text-sm font-medium text-slate-700">
+                      <label className="block text-sm font-medium text-[var(--text-secondary)]">
                         Instructions personnalisées
                       </label>
                       <Textarea

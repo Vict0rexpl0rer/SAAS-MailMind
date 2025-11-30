@@ -172,16 +172,16 @@ export function ChatContainer({ onAction }: ChatContainerProps) {
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {/* Alerte si pas de clé API */}
           {hasAPIKey === false && (
-            <div className="bg-amber-50/80 backdrop-blur-sm border border-amber-200 rounded-2xl p-4 mb-4">
+            <div className="bg-[var(--warning)]/10 backdrop-blur-sm border border-[var(--warning)]/30 rounded-2xl p-4 mb-4">
               <div className="flex items-start gap-3">
-                <AlertCircle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
+                <AlertCircle className="w-5 h-5 text-[var(--warning)] flex-shrink-0 mt-0.5" />
                 <div>
-                  <p className="text-sm font-medium text-amber-800">
+                  <p className="text-sm font-medium text-[var(--text-primary)]">
                     Clé API non configurée
                   </p>
-                  <p className="text-sm text-amber-700 mt-1">
+                  <p className="text-sm text-[var(--text-secondary)] mt-1">
                     Pour utiliser l'assistant, configurez une clé API dans les{' '}
-                    <Link href="/dashboard/settings" className="underline font-medium">
+                    <Link href="/dashboard/settings" className="underline font-medium text-[var(--accent-primary)]">
                       paramètres
                     </Link>
                     .
@@ -199,14 +199,14 @@ export function ChatContainer({ onAction }: ChatContainerProps) {
           {/* Indicateur de chargement */}
           {isLoading && (
             <div className="flex gap-3">
-              <div className="w-10 h-10 rounded-full bg-pink-200 flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-pink-600 animate-pulse" />
+              <div className="w-10 h-10 rounded-full bg-[var(--accent-primary)]/20 flex items-center justify-center">
+                <Sparkles className="w-5 h-5 text-[var(--accent-primary)] animate-pulse" />
               </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-pink-100">
+              <div className="bg-[var(--bg-elevated)] backdrop-blur-sm rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-[var(--border-default)]">
                 <div className="flex gap-1.5">
-                  <span className="w-2 h-2 bg-pink-300 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <span className="w-2 h-2 bg-pink-300 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <span className="w-2 h-2 bg-pink-300 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <span className="w-2 h-2 bg-[var(--accent-primary)]/50 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <span className="w-2 h-2 bg-[var(--accent-primary)]/50 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <span className="w-2 h-2 bg-[var(--accent-primary)]/50 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                 </div>
               </div>
             </div>

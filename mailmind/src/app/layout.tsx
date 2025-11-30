@@ -5,23 +5,24 @@
  *
  * Layout racine de l'application MailMind.
  * Définit les métadonnées, la police et la structure HTML de base.
+ * Intègre le ThemeProvider pour le support dark/light mode.
  *
  * =============================================================================
  */
 
 import type { Metadata } from 'next'
-import { Open_Sans } from 'next/font/google'
+import { Inter } from 'next/font/google'
+import { ThemeProvider } from '@/contexts/theme-context'
 import './globals.css'
 
 /**
- * Police Open Sans - Police moderne et très lisible
- * Variable font avec weights de 300 à 800
+ * Police Inter - Police moderne recommandée par le design system
+ * Variable font avec weights de 400 à 700
  */
-const openSans = Open_Sans({
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-open-sans',
-  weight: ['300', '400', '500', '600', '700', '800'],
-  style: ['normal', 'italic'],
+  weight: ['400', '500', '600', '700'],
 })
 
 /**
@@ -58,9 +59,26 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="fr" className={openSans.variable}>
-      <body className="font-sans antialiased bg-white text-slate-900">
-        {children}
+    <html lang="fr" className={inter.variable} suppressHydrationWarning>
+      <head>
+        {/* Script pour éviter le flash de thème incorrect */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const stored = localStorage.getItem('mailmind-theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const theme = stored === 'dark' || (stored === 'system' && prefersDark) || (!stored && prefersDark) ? 'dark' : 'light';
+                document.documentElement.classList.add(theme);
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="font-sans antialiased bg-[var(--bg-primary)] text-[var(--text-primary)]">
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

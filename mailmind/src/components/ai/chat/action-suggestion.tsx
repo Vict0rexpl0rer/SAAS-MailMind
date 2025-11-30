@@ -27,11 +27,11 @@ const ACTION_ICONS = {
 }
 
 const ACTION_COLORS = {
-  send_email: 'bg-green-100 text-green-700 border-green-200 hover:bg-green-200',
-  create_task: 'bg-blue-100 text-blue-700 border-blue-200 hover:bg-blue-200',
-  schedule_followup: 'bg-orange-100 text-orange-700 border-orange-200 hover:bg-orange-200',
-  view_candidate: 'bg-purple-100 text-purple-700 border-purple-200 hover:bg-purple-200',
-  view_email: 'bg-slate-100 text-slate-700 border-slate-200 hover:bg-slate-200',
+  send_email: 'bg-[var(--success)]/10 text-[var(--success)] border-[var(--success)]/30 hover:bg-[var(--success)]/20',
+  create_task: 'bg-[var(--accent-primary)]/10 text-[var(--accent-primary)] border-[var(--accent-primary)]/30 hover:bg-[var(--accent-primary)]/20',
+  schedule_followup: 'bg-[var(--warning)]/10 text-[var(--warning)] border-[var(--warning)]/30 hover:bg-[var(--warning)]/20',
+  view_candidate: 'bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/30 hover:bg-purple-500/20',
+  view_email: 'bg-[var(--surface-default)] text-[var(--text-secondary)] border-[var(--border-default)] hover:bg-[var(--surface-hover)]',
 }
 
 export function ActionSuggestion({ actions, onAction }: ActionSuggestionProps) {
