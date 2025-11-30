@@ -465,6 +465,11 @@ export function getCategoryGroup(categoryId: EmailCategory): EmailCategoryGroup 
 }
 
 /**
+ * Alias pour getCategoryMetadata (compatibilité)
+ */
+export const getCategoryConfig = getCategoryMetadata
+
+/**
  * Labels des statuts candidats (français)
  */
 export const candidateStatusLabels: Record<string, string> = {
